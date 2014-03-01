@@ -1,0 +1,5 @@
+view_radius 0
+step_time 5000
+kick_time 5000
+merge_time 0
+find_time 5000
