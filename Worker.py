@@ -1,6 +1,7 @@
+import sys
+
 import pygame
 from pygame.constants import RLEACCEL
-import sys
 
 
 def object_image_load(parameters):

@@ -1,8 +1,9 @@
+from pygame.time import get_ticks
+
 from states.Main import Main
 from Logic import neighbour_finding
 from states.Pursuit import Pursuit
 from states.Despawning import Despawning
-from pygame.time import get_ticks
 
 
 class Finding(Main):

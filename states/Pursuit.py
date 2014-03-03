@@ -1,5 +1,5 @@
 from pygame.time import get_ticks
-from Logic import path_finding, hex_cube_to_offset, neighbours_in_radius, neighbour_finding
+from Logic import path_finding, hex_cube_to_offset, neighbours_in_radius
 from states.Attacking import Attacking
 from states.Main import Main
 from states.Merging import Merging

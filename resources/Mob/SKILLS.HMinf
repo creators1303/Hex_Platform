@@ -1,5 +1,5 @@
 view_radius 0
-step_time 5000
-kick_time 5000
+step_time 1000
+kick_time 100
 merge_time 0
 find_time 5000

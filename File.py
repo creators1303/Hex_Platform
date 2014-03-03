@@ -2,7 +2,6 @@ from Worker import error_message
 
 
 class File():
-    #TODO: заменить на исключение
     def __init__(self, name):
         self.info = False
         try:

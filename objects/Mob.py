@@ -1,4 +1,3 @@
-from File import File
 from objects.Existence import Existence
 from objects.Stats import Stats
 from states.PrimaryMob import PrimaryMob
@@ -8,12 +7,9 @@ from states.Finding import Finding
 class Mob(Existence):
 
     def __init__(self, coord):
-        #TODO: заменить СТАТУС на набор параметров
-        self.id = 0
-        Existence.__init__(self, coord, False, False, 1)
+        Existence.__init__(self, coord)
         self.state = PrimaryMob(self)
-        #TODO: заменить на имя класса
-        self.stats = Stats(File("Mob/" + "SKILLS.HMinf"), File("Mob/" + "RELATIONSHIPS.HMinf"))
+        self.stats = Stats(self)
         self.add_info = []
 
     def update(self, field, size):
@@ -35,4 +31,4 @@ class Mob(Existence):
         pass
 
     def virtual_image_name(self):
-        return self.__class__.__name__ + '/' + self.__class__.__name__, 255 # , str(self.level)
+        return self.__class__.__name__ + '/' + self.__class__.__name__, 255

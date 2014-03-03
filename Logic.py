@@ -142,7 +142,6 @@ def __hex_circle__(coord, radius, field):
         for ctrl in range(6):
             x = shift_list[-1][0]
             y = shift_list[-1][1]
-            z = shift_list[-1][2]
             shift_list.append((x + y, - x, - y))
             if hex_coord_available((x + y + coord[0], - x + coord[1], - y + coord[2]), field):
                 coord_list.append((x + y + coord[0], - x + coord[1], - y + coord[2]))
@@ -314,8 +313,9 @@ def path_finding(start_coord, finish_coord, field, avoid):
         open_list.remove(work_coord)
         for neigh_coord in __hex_neighbours__(work_coord[0]):
             offset_coord = hex_cube_to_offset(neigh_coord)
-            if field.map[offset_coord[0]][offset_coord[1]][
-                1].passability_change and not neigh_coord in close_coord and not neigh_coord in open_coord:
+            if (field.map[offset_coord[0]][offset_coord[1]][1].passability_change or
+                    field.map[offset_coord[0]][offset_coord[1]][
+                        1].passability) and not neigh_coord in close_coord and not neigh_coord in open_coord:
                 g = work_coord[2] + 1
                 h = __hex_distance__(start_coord, neigh_coord)
                 open_list.append((neigh_coord, g + h, g, h, __line_length__(start_coord, neigh_coord), work_coord[0]))
@@ -346,8 +346,9 @@ def neighbour_finding(start_coord, field, avoid):
         open_list.remove(work_coord)
         for neigh_coord in __hex_neighbours__(work_coord[0]):
             offset_coord = hex_cube_to_offset(neigh_coord)
-            if field.map[offset_coord[0]][offset_coord[1]][
-                1].passability_change and not neigh_coord in close_coord and not neigh_coord in open_coord:
+            if (field.map[offset_coord[0]][offset_coord[1]][1].passability_change or
+                    field.map[offset_coord[0]][offset_coord[1]][
+                        1].passability) and not neigh_coord in close_coord and not neigh_coord in open_coord:
                 open_list.append((neigh_coord, work_coord[1] + 1))
                 open_coord.append(neigh_coord)
     return False

@@ -1,6 +1,10 @@
-class Stats():
-    def __init__(self, skills, relationships):
+from File import File
 
+
+class Stats():
+    def __init__(self, obj):
+        skills = File(obj.__class__.__name__ + '/' + "SKILLS.HMinf")
+        relationships = File(obj.__class__.__name__ + '/' + "RELATIONSHIPS.HMinf")
         skills_dict = {}
         for string in skills.info:
             string = string.split(" ")

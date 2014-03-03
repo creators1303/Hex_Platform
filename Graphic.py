@@ -1,4 +1,4 @@
-from pygame.display import flip, get_surface
+from pygame.display import flip
 from pygame.font import Font
 from Worker import object_image_load
 from File import File

@@ -3,9 +3,8 @@ from objects.Existence import Existence
 
 
 class Door(Existence):
-    def __init__(self, coord, status):
-        #TODO: заменить СТАТУС на набор параметров
-        Existence.__init__(self, coord, status, True, 0)
+    def __init__(self, coord):
+        Existence.__init__(self, coord)
         self.opening = 0
         self.opening_time = False
         self.hard = 500
@@ -21,7 +20,6 @@ class Door(Existence):
             self.transparency = self.passability
 
     def virtual_image_name(self):
-        #TODO: заменить на имя класса
         if self.passability:
-            return 'Door/' + 'door_open', 255  # , ''
-        return 'Door/' + 'door_close', 255  # , ''
+            return self.__class__.__name__ + '/' + self.__class__.__name__ + '_open', 255
+        return self.__class__.__name__ + '/' + self.__class__.__name__ + '_close', 255

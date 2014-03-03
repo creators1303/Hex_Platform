@@ -1,10 +1,12 @@
 from ctypes import cdll
+from pickle import load
+
 from pygame.display import set_mode, list_modes, set_caption
 from pygame import init, quit
 from pygame.constants import FULLSCREEN
+
 from Controller import process
 from objects.Field import Field
-from pickle import load
 
 
 def start_menu():
@@ -32,8 +34,8 @@ def main():
 if __name__ == "__main__":
     #import cProfile
     #import pstats
-    #cProfile.run("main()", 'filee')
-    #p = pstats.Stats('filee')
-    #p.sort_stats('time')
+    #cProfile.run("main()", 'testing/profile.txt')
+    #p = pstats.Stats('testing/profile.txt')
+    #p.sort_stats('cumulative')
     #p.print_stats()
     main()

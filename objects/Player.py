@@ -1,4 +1,3 @@
-from File import File
 from objects.Existence import Existence
 from objects.Stats import Stats
 from states.PrimaryPlayer import PrimaryPlayer
@@ -7,11 +6,8 @@ from states.Waiting import Waiting
 
 class Player(Existence):
     def __init__(self, coord):
-        #TODO: заменить СТАТУС на набор параметров
-        self.id = True
-        Existence.__init__(self, coord, False, False, 5)
-        #TODO: заменить на имя класса
-        self.stats = Stats(File("Player/" + "SKILLS.HMinf"), File("Player/" + "RELATIONSHIPS.HMinf"))
+        Existence.__init__(self, coord)
+        self.stats = Stats(self)
         self.state = PrimaryPlayer(self)
 
     def update(self, field, size):
@@ -34,4 +30,4 @@ class Player(Existence):
         pass
 
     def virtual_image_name(self):
-        return self.__class__.__name__ + '/' + self.__class__.__name__, 255  # , str(self.level)
+        return self.__class__.__name__ + '/' + self.__class__.__name__, 255

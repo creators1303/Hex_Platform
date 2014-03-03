@@ -44,12 +44,12 @@ class Field():
 
 def static_objects(number, coord):
     if number == 0:
-        thing = Cell(coord, True)
+        thing = Cell(coord)
     elif number == 1:
-        thing = Wall(coord, False, False)
+        thing = Wall(coord, False)
     elif number == 2:
-        thing = Wall(coord, False, True)
+        thing = Wall(coord, True)
     elif number == 3:
-        thing = Door(coord, False)
+        thing = Door(coord)
     return thing
 
