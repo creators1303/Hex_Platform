@@ -1,31 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="143b99f4-225d-4f3d-8c93-ebfd64c47b2d" name="Default" comment="Version 0.1.3.&#10;Убраны лишние коментарии.&#10;Временно убрана документация к функциям и классам.&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/Mob/PARAMETERS.HMinf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/Player/PARAMETERS.HMinf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/Wall/PARAMETERS.HMinf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/cell/PARAMETERS.HMinf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/door/PARAMETERS.HMinf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/objects/Cell.py" afterPath="$PROJECT_DIR$/objects/Cell.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/objects/Door.py" afterPath="$PROJECT_DIR$/objects/Door.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/objects/Existence.py" afterPath="$PROJECT_DIR$/objects/Existence.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/FIELD.HMmap" afterPath="$PROJECT_DIR$/resources/FIELD.HMmap" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/objects/Field.py" afterPath="$PROJECT_DIR$/objects/Field.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/File.py" afterPath="$PROJECT_DIR$/File.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/states/Finding.py" afterPath="$PROJECT_DIR$/states/Finding.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Graphic.py" afterPath="$PROJECT_DIR$/Graphic.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Logic.py" afterPath="$PROJECT_DIR$/Logic.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/objects/Mob.py" afterPath="$PROJECT_DIR$/objects/Mob.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/objects/Player.py" afterPath="$PROJECT_DIR$/objects/Player.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/states/Pursuit.py" afterPath="$PROJECT_DIR$/states/Pursuit.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/Mob/SKILLS.HMinf" afterPath="$PROJECT_DIR$/resources/Mob/SKILLS.HMinf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/Player/SKILLS.HMinf" afterPath="$PROJECT_DIR$/resources/Player/SKILLS.HMinf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/objects/Stats.py" afterPath="$PROJECT_DIR$/objects/Stats.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/objects/Wall.py" afterPath="$PROJECT_DIR$/objects/Wall.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Worker.py" afterPath="$PROJECT_DIR$/Worker.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/__init__.py" afterPath="$PROJECT_DIR$/resources/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
+    <list default="true" id="143b99f4-225d-4f3d-8c93-ebfd64c47b2d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="project_rpg.iws" />
@@ -491,7 +467,11 @@
       <created>1393675173836</created>
       <updated>1393675173836</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Version 0.1.3.&#10;Добавлены файлы с настройками объектов.&#10;Универсализирован код инициализации объектов.&#10;&#10;Optimized imports.&#10;">
+      <created>1393860889753</created>
+      <updated>1393860889753</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -518,6 +498,7 @@
     <frame x="-8" y="-8" width="1296" height="786" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31753555" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328594" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.328594" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -532,7 +513,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32755905" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31753555" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -552,7 +532,8 @@
     <MESSAGE value="Version 0.1.2&#10;Универсализация динамической камеры.&#10;Для любого экрана расчитываются оптимальные параметры динамической камеры.&#10;" />
     <MESSAGE value="Untracking *.HMsav file.&#10;" />
     <MESSAGE value="Version 0.1.2-rebuild.&#10;Убраны лишние коментарии.&#10;Временно убрана документация к функциям и классам.&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version 0.1.2-rebuild.&#10;Убраны лишние коментарии.&#10;Временно убрана документация к функциям и классам.&#10;" />
+    <MESSAGE value="Version 0.1.3.&#10;Добавлены файлы с настройками объектов.&#10;Универсализирован код инициализации объектов.&#10;&#10;Optimized imports.&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 0.1.3.&#10;Добавлены файлы с настройками объектов.&#10;Универсализирован код инициализации объектов.&#10;&#10;Optimized imports.&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
