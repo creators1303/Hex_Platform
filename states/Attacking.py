@@ -1,14 +1,14 @@
 from pygame.time import get_ticks
-from states.Main import Main
+from states.Communication import Communication
 
 
-class Attacking(Main):
+class Attacking(Communication):
     def __init__(self, mob, aggressor):
-        Main.__init__(self, mob)
+        Communication.__init__(self, mob)
         self.aggressor = aggressor
         self.kick = get_ticks()
 
-    def update(self, field, size):
+    def update(self, field):
         if get_ticks() - self.kick >= self.mob.stats.kick_time:
             self.aggressor.health -= 1
             if self.aggressor.health == 0:

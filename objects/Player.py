@@ -10,8 +10,8 @@ class Player(Existence):
         self.stats = Stats(self)
         self.state = PrimaryPlayer(self)
 
-    def update(self, field, size):
-        status = self.state.update(field, size)
+    def update(self, field):
+        status = self.state.update(field)
         if status == 2:
             self.state = Waiting(self)
         if status == 3:

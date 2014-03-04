@@ -1,18 +1,18 @@
 from pygame.time import get_ticks
 from Logic import path_finding, hex_cube_to_offset, neighbours_in_radius
 from states.Attacking import Attacking
-from states.Main import Main
+from states.Alone import Alone
 from states.Merging import Merging
 
 
-class Pursuit(Main):
+class Pursuit(Alone):
     def __init__(self, mob, strike, field):
-        Main.__init__(self, mob)
+        Alone.__init__(self, mob)
         self.strike = strike
         self.after = self.mob.stats.relationships[self.strike.__class__.__name__]
         self.step = get_ticks()
 
-    def update(self, field, size):
+    def update(self, field):
         path = path_finding(self.mob.coord, self.strike.coord, field, self.mob.add_info)
         if not path:
             return 2

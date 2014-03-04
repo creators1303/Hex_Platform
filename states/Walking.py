@@ -1,19 +1,19 @@
 from pygame.time import get_ticks
 from Logic import path_finding, hex_cube_to_offset, hex_visible_false, hex_visible_true, neighbours_in_radius
 from states.Attacking import Attacking
-from states.Main import Main
+from states.Alone import Alone
 
 
-class Walking(Main):
+class Walking(Alone):
     def __init__(self, mob, hexagon, field):
-        Main.__init__(self, mob)
+        Alone.__init__(self, mob)
         if hexagon != self.mob.coord:
             self.path = path_finding(self.mob.coord, hexagon, field, [])
         else:
             self.path = []
         self.step = get_ticks()
 
-    def update(self, field, size):
+    def update(self, field):
         if not self.path:
             return 2
         if get_ticks() - self.step >= self.mob.stats.step_time:

@@ -3,15 +3,15 @@ from pygame.display import iconify
 from pygame.event import poll, clear
 from Logic import pixel_to_hex, hex_cube_to_offset, hex_coord_available, neighbours_in_radius
 from states.Attacking import Attacking
-from states.Main import Main
+from states.Alone import Alone
 from states.Walking import Walking
 
 
-class Waiting(Main):
+class Waiting(Alone):
     def __init__(self, mob):
-        Main.__init__(self, mob)
+        Alone.__init__(self, mob)
 
-    def update(self, field, size):
+    def update(self, field):
         new_event = poll()
         if new_event.type == QUIT:
             return False
@@ -21,14 +21,14 @@ class Waiting(Main):
         elif new_event.type == MOUSEBUTTONUP:
             if new_event.button == 1:
                 position = new_event.pos[0] + field.camera.border_pixel[0], new_event.pos[1] + field.camera.border_pixel[1]
-                hexagon = pixel_to_hex(position, size)
+                hexagon = pixel_to_hex(position, field.camera.size)
                 coord = hex_cube_to_offset(hexagon)
                 if hex_coord_available(hexagon, field) and field.map[coord[0]][coord[1]][1].exploration and \
                         field.map[coord[0]][coord[1]][1].passability:
                     self.mob.state = Walking(self.mob, hexagon, field)
             if new_event.button == 3:
                 position = new_event.pos[0] + field.camera.border_pixel[0], new_event.pos[1] + field.camera.border_pixel[1]
-                hexagon = pixel_to_hex(position, size)
+                hexagon = pixel_to_hex(position, field.camera.size)
                 coord = hex_cube_to_offset(hexagon)
                 if hex_coord_available(hexagon, field) and field.map[coord[0]][coord[1]][1].exploration and \
                         field.map[coord[0]][coord[1]][1].passability_change:

@@ -1,14 +1,14 @@
 from pygame.time import get_ticks
-from states.Main import Main
+from states.Communication import Communication
 
 
-class Merging(Main):
+class Merging(Communication):
     def __init__(self, mob, merger):
-        Main.__init__(self, mob)
+        Communication.__init__(self, mob)
         self.merger = merger
         self.merge = get_ticks()
 
-    def update(self, field, size):
+    def update(self, field):
         if get_ticks() - self.merge >= self.mob.stats.merge_time:
             if self.mob.health >= self.merger.health > 0:
                 self.mob.health += 1

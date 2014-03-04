@@ -1,13 +1,13 @@
 from Logic import hex_visible_true
-from states.Main import Main
+from states.Alone import Alone
 from states.Waiting import Waiting
 
 
-class PrimaryPlayer(Main):
+class PrimaryPlayer(Alone):
     def __init__(self, mob):
-        Main.__init__(self, mob)
+        Alone.__init__(self, mob)
 
-    def update(self, field, size):
+    def update(self, field):
         hex_visible_true(field, self.mob.coord, self.mob.stats.view_radius)
         self.mob.state = Waiting(self.mob)
         return True

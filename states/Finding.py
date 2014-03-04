@@ -1,18 +1,18 @@
 from pygame.time import get_ticks
 
-from states.Main import Main
+from states.Alone import Alone
 from Logic import neighbour_finding
 from states.Pursuit import Pursuit
 from states.Despawning import Despawning
 
 
-class Finding(Main):
+class Finding(Alone):
     def __init__(self, mob, avoid):
-        Main.__init__(self, mob)
+        Alone.__init__(self, mob)
         self.avoid = avoid
         self.find_time = get_ticks()
 
-    def update(self, field, size):
+    def update(self, field):
         strike = neighbour_finding(self.mob.coord, field, self.avoid)
         if strike:
             self.mob.state = Pursuit(self.mob, strike, field)

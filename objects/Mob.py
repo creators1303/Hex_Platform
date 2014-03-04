@@ -12,8 +12,8 @@ class Mob(Existence):
         self.stats = Stats(self)
         self.add_info = []
 
-    def update(self, field, size):
-        status = self.state.update(field, size)
+    def update(self, field):
+        status = self.state.update(field)
         if status == 2:
             self.state = Finding(self, self.add_info)
         return status

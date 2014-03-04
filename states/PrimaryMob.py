@@ -1,12 +1,12 @@
-from states.Main import Main
+from states.Alone import Alone
 from states.Finding import Finding
 
 
-class PrimaryMob(Main):
+class PrimaryMob(Alone):
     def __init__(self, mob):
-        Main.__init__(self, mob)
+        Alone.__init__(self, mob)
 
-    def update(self, field, size):
+    def update(self, field):
         self.mob.state = Finding(self.mob, [])
         return True
 
