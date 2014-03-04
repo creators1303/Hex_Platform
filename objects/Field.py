@@ -51,5 +51,7 @@ def static_objects(number, coord):
         thing = Wall(coord, True)
     elif number == 3:
         thing = Door(coord)
+    elif number == 4:
+        thing = Wall(coord, False)
     return thing
 

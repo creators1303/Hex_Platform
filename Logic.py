@@ -120,7 +120,7 @@ def __hex_radius__(coord, radius, field):
     for x in range(coord[0] - radius, coord[0] + radius + 1):
         for y in range(coord[1] - radius, coord[1] + radius + 1):
             for z in range(coord[2] - radius, coord[2] + radius + 1):
-                if hex_coord_available((x, y, z), field):  # and (x, y, z) != coord:
+                if hex_coord_available((x, y, z), field):
                     coord_list.append((x, y, z))
     return coord_list
 
@@ -177,7 +177,6 @@ def __hex_angle__(coord1, coord2):
 def _shadow_optimize_(shadows):
     #TODO: вставить в проверку видимости
     shadows.sort(key=itemgetter(0))
-    #print(shadows)
     for ctrl in range(len(shadows) - 1):
         while True:
             if ctrl < len(shadows) - 1:
@@ -272,7 +271,6 @@ def hex_visible_false(field, coord, radius):
         for y in range(coord[1] - radius, coord[1] + radius + 1):
             for z in range(coord[2] - radius, coord[2] + radius + 1):
                 if hex_coord_available((x, y, z), field):
-                    #print (x, y)
                     coord_offset = hex_cube_to_offset((x, y))
                     field.map[coord_offset[0]][coord_offset[1]][1].visibility = False
 
@@ -301,7 +299,6 @@ def path_finding(start_coord, finish_coord, field, avoid):
             finally_list = [close_list[-1][0]]
             x = close_list[-1]
             while x[5]:
-                #print('x4 = ', x[4])
                 finally_list.append(x[5])
                 for y in close_list:
                     if y[0] == x[5]:
