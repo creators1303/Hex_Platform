@@ -1,5 +1,11 @@
 from Logic import hex_cube_to_offset
 from File import File
+from states.Walking import Walking
+from states.Exploring import Exploring
+from states.Waiting import Waiting
+from states.Despawning import Despawning
+from states.Attacking import Attacking
+from states.Merging import Merging
 
 
 class Existence():
@@ -40,6 +46,36 @@ class Existence():
         #TODO: попробовать убрать эту функцию, вызывать сразу виртуальную
         return self.virtual_image_name()
 
+    def update(self, field):
+        status = self.state.global_update(field)
+        return status
+
+    def state_check(self, field):
+        if not self.alive:
+            del field.objects[self.coord]
+        else:
+            status = self.state.global_check(field)
+            if status == 2:
+                strike = self.state.communication
+                self.state = Attacking(self, strike)
+            if status == 3:
+                strike = self.state.communication
+                self.state = Merging(self, strike)
+            if status == 4:
+                hexagon = self.state.hexagon
+                self.state = Walking(self, hexagon, field)
+            if status == 5:
+                self.state = Waiting(self)
+            if status == 6:
+                self.state = Exploring(self, [])
+            if status == 8:
+                self.state = Despawning(self)
+            return status
+
+    def alive_check(self, field):
+        if not self.alive:
+            del(field.objects[self.coord])
+
     def image_status(self):
         if not self.exploration:
             return False, False, False, 'fog/' + 'fog_incognito', 255
@@ -48,7 +84,3 @@ class Existence():
         if self.visibility == 1:
             return True, True, False, 'fog/' + 'fog', 50
         return True, True, True, False
-
-    def virtual_image_name(self):
-        return 'error'
-        #TODO: заменить на исключение

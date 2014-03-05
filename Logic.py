@@ -320,6 +320,56 @@ def path_finding(start_coord, finish_coord, field, avoid):
     return []
 
 
+def ex_path_finding(start_coord, finish_coord, field, avoid):
+    #(coord, F, G finish, H start, L, parent)
+    """
+    @param start_coord: start hex cube coord
+    @param finish_coord: goal hex cube coord
+    @param field: field object
+    @param avoid: hexes to avoid in path finding
+    @return: path between two hexes
+    """
+    open_list = [(finish_coord, __hex_distance__(start_coord, finish_coord), 0,
+                  __hex_distance__(start_coord, finish_coord), __line_length__(start_coord, finish_coord), False)]
+    open_coord = [finish_coord]
+    close_list = []
+    close_coord = []
+    for mob in avoid:
+        for coord in __hex_radius__(mob.coord, 1, field):
+            close_coord.append(coord)
+    while open_list:
+        work_coord = min(open_list, key=itemgetter(1, 4))
+        close_list.append(work_coord)
+        close_coord.append(work_coord[0])
+        open_coord.remove(work_coord[0])
+        open_list.remove(work_coord)
+        for neigh_coord in __hex_neighbours__(work_coord[0]):
+            if neigh_coord == start_coord:
+                g = work_coord[2] + 1
+                h = __hex_distance__(start_coord, neigh_coord)
+                close_list.append((neigh_coord, g + h, g, h, __line_length__(start_coord, neigh_coord), work_coord[0]))
+                finally_list = [close_list[-1][0]]
+                x = close_list[-1]
+                while x[5]:
+                    finally_list.append(x[5])
+                    for y in close_list:
+                        if y[0] == x[5]:
+                            x = y
+                            break
+                return finally_list[1:]
+            if not hex_coord_available(neigh_coord, field):
+                continue
+            offset_coord = hex_cube_to_offset(neigh_coord)
+            if (field.map[offset_coord[0]][offset_coord[1]][1].passability_change or
+                    field.map[offset_coord[0]][offset_coord[1]][
+                        1].passability) and not neigh_coord in close_coord and not neigh_coord in open_coord:
+                g = work_coord[2] + 1
+                h = __hex_distance__(start_coord, neigh_coord)
+                open_list.append((neigh_coord, g + h, g, h, __line_length__(start_coord, neigh_coord), work_coord[0]))
+                open_coord.append(neigh_coord)
+    return []
+
+
 def neighbour_finding(start_coord, field, avoid):
     #(coord, G start)
     """
@@ -343,6 +393,36 @@ def neighbour_finding(start_coord, field, avoid):
         open_list.remove(work_coord)
         for neigh_coord in __hex_neighbours__(work_coord[0]):
             offset_coord = hex_cube_to_offset(neigh_coord)
+            if (field.map[offset_coord[0]][offset_coord[1]][1].passability_change or
+                    field.map[offset_coord[0]][offset_coord[1]][
+                        1].passability) and not neigh_coord in close_coord and not neigh_coord in open_coord:
+                open_list.append((neigh_coord, work_coord[1] + 1))
+                open_coord.append(neigh_coord)
+    return False
+
+
+def unexplored_finding(start_coord, field, avoid):
+    #(coord, G start)
+    """
+    @param start_coord: start hex cube coord
+    @param field: field object
+    @param avoid: hexes to avoid in neigh finding
+    @return: most close neighbour
+    """
+    open_list = [(start_coord, 0)]
+    open_coord = [start_coord]
+    close_list = []
+    close_coord = []
+    while open_list:
+        work_coord = min(open_list, key=itemgetter(1))
+        close_list.append(work_coord)
+        close_coord.append(work_coord[0])
+        open_coord.remove(work_coord[0])
+        open_list.remove(work_coord)
+        for neigh_coord in __hex_neighbours__(work_coord[0]):
+            offset_coord = hex_cube_to_offset(neigh_coord)
+            if not field.map[offset_coord[0]][offset_coord[1]][1].exploration:
+                return neigh_coord
             if (field.map[offset_coord[0]][offset_coord[1]][1].passability_change or
                     field.map[offset_coord[0]][offset_coord[1]][
                         1].passability) and not neigh_coord in close_coord and not neigh_coord in open_coord:

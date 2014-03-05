@@ -20,5 +20,5 @@ class Merging(Communication):
 
     def check(self, field):
         if not self.merger.alive:
-            return 2
+            return 7
         return True

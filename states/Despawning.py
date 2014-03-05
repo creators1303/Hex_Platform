@@ -8,7 +8,7 @@ class Despawning(Alone):
         self.countdown = get_ticks()
 
     def update(self, field):
-        if get_ticks() - self.countdown >= 3000:
+        if get_ticks() - self.countdown >= self.mob.stats.despawn_time:
             self.mob.alive = False
         return True
 

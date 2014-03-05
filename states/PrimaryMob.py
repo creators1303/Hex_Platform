@@ -1,5 +1,5 @@
 from states.Alone import Alone
-from states.Finding import Finding
+from states.Pursuit import Pursuit
 
 
 class PrimaryMob(Alone):
@@ -7,8 +7,9 @@ class PrimaryMob(Alone):
         Alone.__init__(self, mob)
 
     def update(self, field):
-        self.mob.state = Finding(self.mob, [])
+        self.mob.state = Pursuit(self.mob, [])
         return True
 
+    @staticmethod
     def check(self, field):
-        pass
+        return True

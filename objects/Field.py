@@ -18,6 +18,7 @@ class Field():
         self.screen = screen
         self.map = []
         self.objects = {}
+        self.supervisors = []
         self.camera = None
         for ctrl_row in range(1, self.rows + 1):
             static_cell = fields.get_info(ctrl_row)
@@ -32,8 +33,6 @@ class Field():
 
     def dynamic_objects(self, number, coord):
         #TODO: РЕ разобраться с этим предупреждением
-        if number == 0:
-            return False
         if number == 1:
             thing = Player(coord)
             self.camera = Viewer(thing, self.screen)

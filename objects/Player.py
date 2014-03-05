@@ -1,7 +1,7 @@
 from objects.Existence import Existence
 from objects.Stats import Stats
 from states.PrimaryPlayer import PrimaryPlayer
-from states.Waiting import Waiting
+
 
 
 class Player(Existence):
@@ -9,21 +9,6 @@ class Player(Existence):
         Existence.__init__(self, coord)
         self.stats = Stats(self)
         self.state = PrimaryPlayer(self)
-
-    def update(self, field):
-        status = self.state.update(field)
-        if status == 2:
-            self.state = Waiting(self)
-        if status == 3:
-            return False
-        return status
-
-    def check(self, field):
-        if not self.alive:
-            del field.objects[self.coord]
-        else:
-            status = self.state.check(field)
-            return status
 
     @staticmethod
     def status_change():

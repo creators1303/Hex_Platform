@@ -7,6 +7,7 @@ from pygame.constants import FULLSCREEN
 
 from Controller import process
 from objects.Field import Field
+from objects.Supervisor import Supervisor
 
 
 def start_menu():
@@ -17,8 +18,9 @@ def start_menu():
         screen = set_mode(list_modes()[0], FULLSCREEN)
         set_caption("Hero Misadventures")
         if choose == 1:
-            cdll.LoadLibrary("Generator.dll").main_generator(50, 30)
+            cdll.LoadLibrary("Generator.dll").main_generator(50, 40)
             field = Field(screen)
+            field.supervisors.append(Supervisor())
             process(screen, field)
         if choose == 2:
             field = load(open("resources/SAVE.HMsave", "rb"))
