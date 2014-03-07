@@ -6,15 +6,19 @@ from states.Waiting import Waiting
 from states.Despawning import Despawning
 from states.Attacking import Attacking
 from states.Merging import Merging
+from states.Pursuit import Pursuit
 
 
 class Existence():
-    def __init__(self, coord):
+    def __init__(self, coord, state):
         parameters = File(self.__class__.__name__ + '/' + "PARAMETERS.HMinf")
         info = {}
         for each in parameters.info:
             each = each.split(" ")
             info[each[0]] = int(each[1])
+        self.alone_state = state
+        self.communication_state = False
+        self.current_state = self.alone_state
         self.coord = coord
         self.offset_coord = hex_cube_to_offset(coord)
         self.passability = info["passability"]
@@ -29,7 +33,7 @@ class Existence():
     def going(self, field, hexagon):
         if not hexagon in field.objects:
             field.objects[hexagon] = self
-            del(field.objects[self.coord])
+            del (field.objects[self.coord])
             self.coord = hexagon
             self.offset_coord = hex_cube_to_offset(hexagon)
 
@@ -42,39 +46,41 @@ class Existence():
         if status:
             self.exploration = True
 
-    def image_name(self):
-        #TODO: попробовать убрать эту функцию, вызывать сразу виртуальную
-        return self.virtual_image_name()
-
     def update(self, field):
-        status = self.state.global_update(field)
-        return status
+        return self.current_state.global_update(field)
 
     def state_check(self, field):
-        if not self.alive:
-            del field.objects[self.coord]
-        else:
-            status = self.state.global_check(field)
-            if status == 2:
-                strike = self.state.communication
-                self.state = Attacking(self, strike)
-            if status == 3:
-                strike = self.state.communication
-                self.state = Merging(self, strike)
-            if status == 4:
-                hexagon = self.state.hexagon
-                self.state = Walking(self, hexagon, field)
-            if status == 5:
-                self.state = Waiting(self)
-            if status == 6:
-                self.state = Exploring(self, [])
-            if status == 8:
-                self.state = Despawning(self)
+        status = self.current_state.global_check(field)
+        if status == 1:
             return status
+        elif status == 2:
+            strike = self.current_state.communication
+            self.communication_state = Attacking(self, strike)
+            self.current_state = self.communication_state
+        elif status == 3:
+            strike = self.current_state.communication
+            self.communication_state = Merging(self, strike)
+            self.current_state = self.communication_state
+        else:
+            if status == 4:
+                hexagon = self.current_state.hexagon
+                self.alone_state = Walking(self, hexagon, field)
+            elif status == 5:
+                self.alone_state = Waiting(self)
+            elif status == 6:
+                self.alone_state = Exploring(self, [])
+            elif status == 7:
+                self.alone_state = Pursuit(self, [])
+            elif status == 8:
+                self.alone_state = Despawning(self)
+            elif status == 9:
+                self.current_state = self.alone_state
+            self.current_state = self.alone_state
+        return status
 
     def alive_check(self, field):
-        if not self.alive:
-            del(field.objects[self.coord])
+        if self.health <= 0:
+            del (field.objects[self.coord])
 
     def image_status(self):
         if not self.exploration:

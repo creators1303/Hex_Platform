@@ -23,7 +23,7 @@ def hex_to_pixel(coord, size):
     return int(coord[1] * size[0] * 0.75), int(size[1] * coord[0] + size[1] * 0.5 * ((coord[1] + 1) % 2))
 
 
-def __hex_distance__(coord1, coord2):
+def hex_distance(coord1, coord2):
     """
     @param coord1: cube coord of start hex
     @param coord2: cube coord of goal hex
@@ -284,8 +284,8 @@ def path_finding(start_coord, finish_coord, field, avoid):
     @param avoid: hexes to avoid in path finding
     @return: path between two hexes
     """
-    open_list = [(finish_coord, __hex_distance__(start_coord, finish_coord), 0,
-                  __hex_distance__(start_coord, finish_coord), __line_length__(start_coord, finish_coord), False)]
+    open_list = [(finish_coord, hex_distance(start_coord, finish_coord), 0,
+                  hex_distance(start_coord, finish_coord), __line_length__(start_coord, finish_coord), False)]
     open_coord = [finish_coord]
     close_list = []
     close_coord = []
@@ -314,7 +314,7 @@ def path_finding(start_coord, finish_coord, field, avoid):
                     field.map[offset_coord[0]][offset_coord[1]][
                         1].passability) and not neigh_coord in close_coord and not neigh_coord in open_coord:
                 g = work_coord[2] + 1
-                h = __hex_distance__(start_coord, neigh_coord)
+                h = hex_distance(start_coord, neigh_coord)
                 open_list.append((neigh_coord, g + h, g, h, __line_length__(start_coord, neigh_coord), work_coord[0]))
                 open_coord.append(neigh_coord)
     return []
@@ -329,8 +329,8 @@ def ex_path_finding(start_coord, finish_coord, field, avoid):
     @param avoid: hexes to avoid in path finding
     @return: path between two hexes
     """
-    open_list = [(finish_coord, __hex_distance__(start_coord, finish_coord), 0,
-                  __hex_distance__(start_coord, finish_coord), __line_length__(start_coord, finish_coord), False)]
+    open_list = [(finish_coord, hex_distance(start_coord, finish_coord), 0,
+                  hex_distance(start_coord, finish_coord), __line_length__(start_coord, finish_coord), False)]
     open_coord = [finish_coord]
     close_list = []
     close_coord = []
@@ -346,7 +346,7 @@ def ex_path_finding(start_coord, finish_coord, field, avoid):
         for neigh_coord in __hex_neighbours__(work_coord[0]):
             if neigh_coord == start_coord:
                 g = work_coord[2] + 1
-                h = __hex_distance__(start_coord, neigh_coord)
+                h = hex_distance(start_coord, neigh_coord)
                 close_list.append((neigh_coord, g + h, g, h, __line_length__(start_coord, neigh_coord), work_coord[0]))
                 finally_list = [close_list[-1][0]]
                 x = close_list[-1]
@@ -364,7 +364,7 @@ def ex_path_finding(start_coord, finish_coord, field, avoid):
                     field.map[offset_coord[0]][offset_coord[1]][
                         1].passability) and not neigh_coord in close_coord and not neigh_coord in open_coord:
                 g = work_coord[2] + 1
-                h = __hex_distance__(start_coord, neigh_coord)
+                h = hex_distance(start_coord, neigh_coord)
                 open_list.append((neigh_coord, g + h, g, h, __line_length__(start_coord, neigh_coord), work_coord[0]))
                 open_coord.append(neigh_coord)
     return []
@@ -386,7 +386,7 @@ def neighbour_finding(start_coord, field, avoid):
         work_coord = min(open_list, key=itemgetter(1))
         close_list.append(work_coord)
         if work_coord[0] in field.objects and work_coord[0] != start_coord:
-            if not field.objects[work_coord[0]] in avoid and field.objects[work_coord[0]].alive:
+            if not field.objects[work_coord[0]] in avoid:
                 return field.objects[work_coord[0]]
         close_coord.append(work_coord[0])
         open_coord.remove(work_coord[0])

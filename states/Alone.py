@@ -8,7 +8,7 @@ class Alone(Main):
         self.communication = False
 
     def global_update(self, field):
-        return self.mob.state.update(field)
+        return self.mob.current_state.update(field)
 
     def global_check(self, field):
         nearest = neighbours_in_radius(self.mob.coord, 1, field)
@@ -19,4 +19,4 @@ class Alone(Main):
             if self.mob.stats.relationships[each.__class__.__name__] == "Merging":
                 self.communication = each
                 return 3
-        return self.mob.state.check(field)
+        return self.mob.current_state.check(field)

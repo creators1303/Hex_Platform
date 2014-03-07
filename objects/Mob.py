@@ -6,10 +6,8 @@ from states.PrimaryMob import PrimaryMob
 class Mob(Existence):
 
     def __init__(self, coord):
-        Existence.__init__(self, coord)
-        self.state = PrimaryMob(self)
+        Existence.__init__(self, coord, PrimaryMob(self))
         self.stats = Stats(self)
-        self.add_info = []
 
     @staticmethod
     def status_change():

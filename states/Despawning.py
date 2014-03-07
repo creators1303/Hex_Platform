@@ -9,8 +9,8 @@ class Despawning(Alone):
 
     def update(self, field):
         if get_ticks() - self.countdown >= self.mob.stats.despawn_time:
-            self.mob.alive = False
+            self.mob.health = 0
         return True
 
     def check(self, field):
-        pass
+        return True

@@ -18,7 +18,7 @@ def start_menu():
         screen = set_mode(list_modes()[0], FULLSCREEN)
         set_caption("Hero Misadventures")
         if choose == 1:
-            cdll.LoadLibrary("Generator.dll").main_generator(50, 40)
+            cdll.LoadLibrary("Generator.dll").main_generator(50, 50)
             field = Field(screen)
             field.supervisors.append(Supervisor())
             process(screen, field)

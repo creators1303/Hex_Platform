@@ -79,7 +79,7 @@ class Viewer():
                 pixel = field.map[ctrl_row][ctrl_column][2][0] - self.border_pixel[0] + self.border_width, \
                         field.map[ctrl_row][ctrl_column][2][1] - self.border_pixel[1] + self.border_height
                 if parameters[0]:
-                    picture = list(field.map[ctrl_row][ctrl_column][1].image_name())
+                    picture = list(field.map[ctrl_row][ctrl_column][1].virtual_image_name())
                     picture.append(self.size)
                     screen.blit(animation.get_image(picture), pixel)
                 if parameters[3]:
@@ -93,7 +93,7 @@ class Viewer():
                 pixel = field.map[dynamic_object.offset_coord[0]][dynamic_object.offset_coord[1]][2][0] - self.border_pixel[0] + self.border_width, \
                         field.map[dynamic_object.offset_coord[0]][dynamic_object.offset_coord[1]][2][1] - self.border_pixel[1] + self.border_height
                 if parameters[1]:
-                    picture = list(dynamic_object.image_name())
+                    picture = list(dynamic_object.virtual_image_name())
                     picture.append(self.size)
                     screen.blit(animation.get_image(picture), pixel)
                     if parameters[2]:

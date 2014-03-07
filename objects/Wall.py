@@ -3,7 +3,7 @@ from objects.Existence import Existence
 
 class Wall(Existence):
     def __init__(self, coord, destructible):
-        Existence.__init__(self, coord)
+        Existence.__init__(self, coord, False)
         self.destructible = destructible
 
     @staticmethod
