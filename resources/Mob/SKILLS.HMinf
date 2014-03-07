@@ -1,6 +1,6 @@
 view_radius 0
 step_time 100
-kick_time 100
-merge_time 0
+kick_time 600
+merge_time 100
 find_time 5000
 despawn_time 5000

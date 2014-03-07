@@ -4,8 +4,7 @@ from states.Communication import Communication
 
 class Attacking(Communication):
     def __init__(self, mob, aggressor):
-        Communication.__init__(self, mob)
-        self.communication = aggressor
+        Communication.__init__(self, mob, aggressor)
         self.kick = get_ticks()
 
     def update(self, field):

@@ -4,9 +4,8 @@ from Logic import unexplored_finding, hex_cube_to_offset, hex_visible_false, hex
 
 
 class Exploring(Alone):
-    def __init__(self, mob, avoid):
+    def __init__(self, mob):
         Alone.__init__(self, mob)
-        self.avoid = avoid
         self.find = 0
         self.hexagon = False
         self.path = []

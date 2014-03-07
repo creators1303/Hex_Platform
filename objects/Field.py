@@ -6,6 +6,7 @@ from objects.Door import Door
 from objects.Mob import Mob
 from objects.Player import Player
 from objects.Wall import Wall
+from objects.Supervisor import Supervisor
 
 
 class Field():
@@ -35,6 +36,7 @@ class Field():
         #TODO: РЕ разобраться с этим предупреждением
         if number == 1:
             thing = Player(coord)
+            self.supervisors.append(Supervisor(thing))
             self.camera = Viewer(thing, self.screen)
         elif number == 2:
             thing = Mob(coord)

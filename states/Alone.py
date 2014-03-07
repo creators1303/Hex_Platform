@@ -6,6 +6,7 @@ class Alone(Main):
     def __init__(self, mob):
         Main.__init__(self, mob)
         self.communication = False
+        self.avoid = []
 
     def global_update(self, field):
         return self.mob.current_state.update(field)
@@ -19,4 +20,8 @@ class Alone(Main):
             if self.mob.stats.relationships[each.__class__.__name__] == "Merging":
                 self.communication = each
                 return 3
+        nearest = neighbours_in_radius(self.mob.coord, 3, field)
+        for each in nearest:
+            if not self.mob.relationships_check(each) and self.mob.stats.relationships[each.__class__.__name__] == "Attacking":
+                self.avoid.append(each)
         return self.mob.current_state.check(field)

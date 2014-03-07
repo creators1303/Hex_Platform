@@ -4,9 +4,8 @@ from Logic import hex_cube_to_offset, neighbour_finding, path_finding
 
 
 class Pursuit(Alone):
-    def __init__(self, mob, avoid):
+    def __init__(self, mob):
         Alone.__init__(self, mob)
-        self.avoid = avoid
         self.find = 0
         self.strike = False
         self.path = []
@@ -35,7 +34,8 @@ class Pursuit(Alone):
 
     def check(self, field):
         if self.strike:
-            if self.strike.health <= 0:
+            if self.strike.health <= 0 or self.strike in self.avoid:
                 self.strike = False
+        return True
         #if get_ticks() - self.find >= self.mob.stats.find_time:
         #return 8

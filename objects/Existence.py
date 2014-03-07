@@ -1,6 +1,5 @@
 from Logic import hex_cube_to_offset
 from File import File
-from states.Walking import Walking
 from states.Exploring import Exploring
 from states.Waiting import Waiting
 from states.Despawning import Despawning
@@ -28,7 +27,6 @@ class Existence():
         self.health = info["health"]
         self.exploration = False
         self.visibility = False
-        self.alive = True
 
     def going(self, field, hexagon):
         if not hexagon in field.objects:
@@ -37,8 +35,9 @@ class Existence():
             self.coord = hexagon
             self.offset_coord = hex_cube_to_offset(hexagon)
 
-    @staticmethod
-    def relationships_check(mob):
+    def relationships_check(self, mob):
+        if mob.health > self.health:
+            return False
         return True
 
     def visible_change(self, status):
@@ -62,15 +61,15 @@ class Existence():
             self.communication_state = Merging(self, strike)
             self.current_state = self.communication_state
         else:
-            if status == 4:
+            '''if status == 4:
                 hexagon = self.current_state.hexagon
-                self.alone_state = Walking(self, hexagon, field)
-            elif status == 5:
+                self.alone_state = Walking(self, hexagon, field)'''
+            if status == 5:
                 self.alone_state = Waiting(self)
             elif status == 6:
-                self.alone_state = Exploring(self, [])
+                self.alone_state = Exploring(self)
             elif status == 7:
-                self.alone_state = Pursuit(self, [])
+                self.alone_state = Pursuit(self)
             elif status == 8:
                 self.alone_state = Despawning(self)
             elif status == 9:
