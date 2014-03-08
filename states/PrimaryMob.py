@@ -5,8 +5,10 @@ class PrimaryMob(Alone):
     def __init__(self, mob):
         Alone.__init__(self, mob)
 
-    def update(self, field):
+    @staticmethod
+    def update(field):
         return True
 
-    def check(self, field):
+    @staticmethod
+    def check(field):
         return 7

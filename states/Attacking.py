@@ -13,5 +13,6 @@ class Attacking(Communication):
             self.kick = get_ticks()
         return True
 
-    def check(self, field):
+    @staticmethod
+    def check(field):
         return True

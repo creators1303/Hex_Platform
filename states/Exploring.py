@@ -15,16 +15,12 @@ class Exploring(Alone):
         if not self.hexagon:
             self.hexagon = unexplored_finding(self.mob.coord, field, self.avoid)
         else:
-            self.find = get_ticks()
-            coord = hex_cube_to_offset(self.hexagon)
-            if field.map[coord[0]][coord[1]][1].exploration:
-                self.hexagon = False
-            else:
-                self.going(field)
+            self.going(field)
+        if self.hexagon:
+            self.path = ex_path_finding(self.mob.coord, self.hexagon, field, self.avoid)
         return True
 
     def going(self, field):
-        self.path = ex_path_finding(self.mob.coord, self.hexagon, field, self.avoid)
         if self.path and get_ticks() - self.step >= self.mob.stats.step_time:
             hexagon = self.path[0]
             coord = hex_cube_to_offset(hexagon)
@@ -39,6 +35,12 @@ class Exploring(Alone):
         return True
 
     def check(self, field):
+        if self.hexagon:
+            coord = hex_cube_to_offset(self.hexagon)
+            if field.map[coord[0]][coord[1]][1].exploration:
+                self.hexagon = False
+            elif not self.path:
+                self.hexagon = False
         return True
         #if get_ticks() - self.find >= self.mob.stats.find_time:
         #return 8

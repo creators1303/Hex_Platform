@@ -1,7 +1,7 @@
 from pygame.constants import QUIT, KEYDOWN, K_ESCAPE, MOUSEBUTTONUP
 from pygame.display import iconify
 from pygame.event import poll, clear
-from Logic import pixel_to_hex, hex_cube_to_offset, hex_coord_available, neighbours_in_radius
+from Logic import pixel_to_hex, hex_cube_to_offset, hex_coord_available
 from states.Alone import Alone
 
 

@@ -29,5 +29,6 @@ class Merging(Communication):
         return -1
 
 
-    def check(self, field):
+    @staticmethod
+    def check(field):
         return True

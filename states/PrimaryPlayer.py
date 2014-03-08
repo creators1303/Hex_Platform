@@ -10,6 +10,7 @@ class PrimaryPlayer(Alone):
         hex_visible_true(field, self.mob.coord, self.mob.stats.view_radius)
         return True
 
-    def check(self, field):
+    @staticmethod
+    def check(field):
         return 6
 

@@ -17,7 +17,7 @@ def start_menu():
         screen = set_mode(list_modes()[0], FULLSCREEN)
         set_caption("Hero Misadventures")
         if choose == 1:
-            #cdll.LoadLibrary("Generator.dll").main_generator(50, 50)
+            #cdll.LoadLibrary("Generator.dll").main_generator(20, 20)
             field = Field(screen)
             process(screen, field)
         if choose == 2:
@@ -32,10 +32,10 @@ def main():
     start_menu()
 
 if __name__ == "__main__":
-    #import cProfile
-    #import pstats
-    #cProfile.run("main()", 'testing/profile.txt')
-    #p = pstats.Stats('testing/profile.txt')
-    #p.sort_stats('cumulative')
-    #p.print_stats()
+    '''import cProfile
+    import pstats
+    cProfile.run("main()", 'testing/profile.txt')
+    p = pstats.Stats('testing/profile.txt')
+    p.sort_stats('cumulative')
+    p.print_stats()'''
     main()

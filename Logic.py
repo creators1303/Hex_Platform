@@ -383,6 +383,9 @@ def neighbour_finding(start_coord, field, avoid):
     close_list = []
     close_coord = []
     coord = list(field.objects.keys())
+    for mob in avoid:
+        for coord in __hex_radius__(mob.coord, 1, field):
+            close_coord.append(coord)
     while open_list:
         work_coord = min(open_list, key=itemgetter(1))
         close_list.append(work_coord)
@@ -414,6 +417,9 @@ def unexplored_finding(start_coord, field, avoid):
     open_coord = [start_coord]
     close_list = []
     close_coord = []
+    for mob in avoid:
+        for coord in __hex_radius__(mob.coord, 1, field):
+            close_coord.append(coord)
     while open_list:
         work_coord = min(open_list, key=itemgetter(1))
         close_list.append(work_coord)

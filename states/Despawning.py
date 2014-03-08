@@ -12,5 +12,6 @@ class Despawning(Alone):
             self.mob.health = 0
         return True
 
-    def check(self, field):
+    @staticmethod
+    def check(field):
         return True

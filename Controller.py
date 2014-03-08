@@ -19,6 +19,3 @@ def process(screen, field):
             dynamic_object.alive_check(field)
 
         field.camera.draw_field(screen, field, storage)
-
-        if not field.objects:
-            return
