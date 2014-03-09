@@ -4,3 +4,4 @@ kick_time 600
 merge_time 100
 find_time 5000
 despawn_time 5000
+path_time 1000

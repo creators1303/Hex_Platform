@@ -290,7 +290,7 @@ def path_finding(start_coord, finish_coord, field, avoid):
     close_list = []
     close_coord = []
     for mob in avoid:
-        for coord in __hex_radius__(mob.coord, 1, field):
+        for coord in __hex_radius__(mob.coord, 2, field):
             close_coord.append(coord)
     while open_list:
         work_coord = min(open_list, key=itemgetter(1, 4))
@@ -335,7 +335,7 @@ def ex_path_finding(start_coord, finish_coord, field, avoid):
     close_list = []
     close_coord = []
     for mob in avoid:
-        for coord in __hex_radius__(mob.coord, 1, field):
+        for coord in __hex_radius__(mob.coord, 2, field):
             close_coord.append(coord)
     while open_list:
         work_coord = min(open_list, key=itemgetter(1, 4))
@@ -345,7 +345,8 @@ def ex_path_finding(start_coord, finish_coord, field, avoid):
         open_list.remove(work_coord)
         for neigh_coord in __hex_neighbours__(work_coord[0]):
             if neigh_coord == start_coord:
-                g = work_coord[2] + 1
+                return work_coord[0]
+                '''g = work_coord[2] + 1
                 h = hex_distance(start_coord, neigh_coord)
                 close_list.append((neigh_coord, g + h, g, h, __line_length__(start_coord, neigh_coord), work_coord[0]))
                 finally_list = [close_list[-1][0]]
@@ -356,7 +357,7 @@ def ex_path_finding(start_coord, finish_coord, field, avoid):
                         if y[0] == x[5]:
                             x = y
                             break
-                return finally_list[1:]
+                return finally_list[1:]'''
             if not hex_coord_available(neigh_coord, field):
                 continue
             offset_coord = hex_cube_to_offset(neigh_coord)
@@ -367,7 +368,7 @@ def ex_path_finding(start_coord, finish_coord, field, avoid):
                 h = hex_distance(start_coord, neigh_coord)
                 open_list.append((neigh_coord, g + h, g, h, __line_length__(start_coord, neigh_coord), work_coord[0]))
                 open_coord.append(neigh_coord)
-    return []
+    return False
 
 
 def neighbour_finding(start_coord, field, avoid):
@@ -418,7 +419,7 @@ def unexplored_finding(start_coord, field, avoid):
     close_list = []
     close_coord = []
     for mob in avoid:
-        for coord in __hex_radius__(mob.coord, 1, field):
+        for coord in __hex_radius__(mob.coord, 2, field):
             close_coord.append(coord)
     while open_list:
         work_coord = min(open_list, key=itemgetter(1))
@@ -427,14 +428,15 @@ def unexplored_finding(start_coord, field, avoid):
         open_coord.remove(work_coord[0])
         open_list.remove(work_coord)
         for neigh_coord in __hex_neighbours__(work_coord[0]):
-            offset_coord = hex_cube_to_offset(neigh_coord)
-            if not field.map[offset_coord[0]][offset_coord[1]][1].exploration:
-                return neigh_coord
-            if (field.map[offset_coord[0]][offset_coord[1]][1].passability_change or
-                    field.map[offset_coord[0]][offset_coord[1]][
-                        1].passability) and not neigh_coord in close_coord and not neigh_coord in open_coord:
-                open_list.append((neigh_coord, work_coord[1] + 1))
-                open_coord.append(neigh_coord)
+            if not neigh_coord in close_coord:
+                offset_coord = hex_cube_to_offset(neigh_coord)
+                if not field.map[offset_coord[0]][offset_coord[1]][1].exploration:
+                    return neigh_coord
+                if (field.map[offset_coord[0]][offset_coord[1]][1].passability_change or
+                        field.map[offset_coord[0]][offset_coord[1]][
+                            1].passability) and not neigh_coord in open_coord:
+                    open_list.append((neigh_coord, work_coord[1] + 1))
+                    open_coord.append(neigh_coord)
     return False
 
 

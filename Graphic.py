@@ -87,9 +87,9 @@ class Viewer():
                     parameters.append(self.size)
                     screen.blit(animation.get_image(parameters), pixel)
         for dynamic_object in field.objects.values():
-            parameters = field.map[dynamic_object.offset_coord[0]][dynamic_object.offset_coord[1]][1].image_status()
             if self.border_from[0] <= dynamic_object.offset_coord[0] <= self.border_to[0] and self.border_from[1] <= \
                     dynamic_object.offset_coord[1] <= self.border_to[1]:
+                parameters = field.map[dynamic_object.offset_coord[0]][dynamic_object.offset_coord[1]][1].image_status()
                 pixel = field.map[dynamic_object.offset_coord[0]][dynamic_object.offset_coord[1]][2][0] - self.border_pixel[0] + self.border_width, \
                         field.map[dynamic_object.offset_coord[0]][dynamic_object.offset_coord[1]][2][1] - self.border_pixel[1] + self.border_height
                 if parameters[1]:
@@ -101,4 +101,24 @@ class Viewer():
                         screen.blit(text, pixel)
                         text = font.render(str(dynamic_object.health), 1, (255, 0, 0))
                         screen.blit(text, (pixel[0] + self.size[0] * 0.75, pixel[1]))
+
+        '''for ctrl_row in range(self.border_from[0], self.border_to[0] + 1):
+            for ctrl_column in range(self.border_from[1], self.border_to[1] + 1):
+                pixel = field.map[ctrl_row][ctrl_column][2][0] - self.border_pixel[0] + self.border_width, \
+                        field.map[ctrl_row][ctrl_column][2][1] - self.border_pixel[1] + self.border_height
+                picture = list(field.map[ctrl_row][ctrl_column][1].virtual_image_name())
+                picture.append(self.size)
+                screen.blit(animation.get_image(picture), pixel)
+        for dynamic_object in field.objects.values():
+            if self.border_from[0] <= dynamic_object.offset_coord[0] <= self.border_to[0] and self.border_from[1] <= \
+                    dynamic_object.offset_coord[1] <= self.border_to[1]:
+                pixel = field.map[dynamic_object.offset_coord[0]][dynamic_object.offset_coord[1]][2][0] - self.border_pixel[0] + self.border_width, \
+                        field.map[dynamic_object.offset_coord[0]][dynamic_object.offset_coord[1]][2][1] - self.border_pixel[1] + self.border_height
+                picture = list(dynamic_object.virtual_image_name())
+                picture.append(self.size)
+                screen.blit(animation.get_image(picture), pixel)
+                text = font.render(str(dynamic_object.level), 1, (255, 255, 0))
+                screen.blit(text, pixel)
+                text = font.render(str(dynamic_object.health), 1, (255, 0, 0))
+                screen.blit(text, (pixel[0] + self.size[0] * 0.75, pixel[1]))'''
         flip()

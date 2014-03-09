@@ -15,6 +15,7 @@ class Stats():
         self.merge_time = skills_dict["merge_time"]
         self.find_time = skills_dict["find_time"]
         self.despawn_time = skills_dict["despawn_time"]
+        self.path_time = skills_dict["path_time"]
 
         self.relationships = {}
         for string in relationships.info:
