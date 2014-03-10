@@ -1,4 +1,3 @@
-from Logic import hex_distance
 from states.Main import Main
 
 
@@ -11,6 +10,7 @@ class Communication(Main):
         return self.mob.current_state.update(field)
 
     def global_check(self, field):
+        from Logic import hex_distance
         if self.communication.health <= 0 or hex_distance(self.mob.coord, self.communication.coord) > 1:
             return 9
         return self.mob.current_state.check(field)

@@ -1,5 +1,4 @@
 from math import sqrt, degrees, atan
-from operator import itemgetter
 
 
 def __line_length__(coord1, coord2):
@@ -177,6 +176,7 @@ def __hex_angle__(coord1, coord2):
 
 def _shadow_optimize_(shadows):
     #TODO: вставить в проверку видимости
+    from operator import itemgetter
     shadows.sort(key=itemgetter(0))
     for ctrl in range(len(shadows) - 1):
         while True:
@@ -285,6 +285,7 @@ def path_finding(start_coord, finish_coord, field, avoid):
     @param avoid: hexes to avoid in path finding
     @return: path between two hexes
     """
+    from operator import itemgetter
     open_list = [(finish_coord, hex_distance(start_coord, finish_coord), 0,
                   hex_distance(start_coord, finish_coord), __line_length__(start_coord, finish_coord), False)]
     open_coord = [finish_coord]
@@ -330,6 +331,7 @@ def ex_path_finding(start_coord, finish_coord, field, avoid):
     @param avoid: hexes to avoid in path finding
     @return: path between two hexes
     """
+    from operator import itemgetter
     open_list = [(finish_coord, hex_distance(start_coord, finish_coord), 0,
                   hex_distance(start_coord, finish_coord), __line_length__(start_coord, finish_coord), False)]
     open_coord = [finish_coord]
@@ -368,6 +370,7 @@ def neighbour_finding(start_coord, field, avoid):
     @param avoid: hexes to avoid in neigh finding
     @return: most close neighbour
     """
+    from operator import itemgetter
     open_list = [(start_coord, 0)]
     open_coord = [start_coord]
     close_list = []
@@ -403,6 +406,7 @@ def unexplored_finding(start_coord, field, avoid):
     @param avoid: hexes to avoid in neigh finding
     @return: most close neighbour
     """
+    from operator import itemgetter
     open_list = [(start_coord, 0)]
     open_coord = [start_coord]
     close_list = []

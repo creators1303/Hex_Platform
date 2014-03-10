@@ -1,6 +1,3 @@
-from Worker import error_message
-
-
 class File():
     def __init__(self, name):
         self.info = False
@@ -8,6 +5,7 @@ class File():
             file = open('resources/' + name)
             self.info = file.readlines()
         except IOError:
+            from Worker import error_message
             error_message("Loading:", "not found " + name)
 
     def get_info(self, string):

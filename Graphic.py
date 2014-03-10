@@ -1,9 +1,3 @@
-from pygame.display import flip
-from pygame.font import Font
-from Worker import object_image_load
-from File import File
-
-
 class ImageStorage():
 
     def __init__(self):
@@ -15,11 +9,13 @@ class ImageStorage():
         return self.storage[parameters[0] + '.HMtex']
 
     def load_image(self, parameters):
+        from Worker import object_image_load
         self.storage[parameters[0] + '.HMtex'] = object_image_load(parameters)
 
 
 class Viewer():
     def __init__(self, player, screen):
+        from File import File
         self.size = list(map(int, File("GRAPHIC.HMinf").get_info(0)))
 
         self.cols = screen.get_width() - self.size[0] * 0.25
@@ -68,6 +64,8 @@ class Viewer():
             self.border_pixel = (self.border_pixel[0], self.border_pixel[1] - self.size[1] / 2)
 
     def draw_field(self, screen, field, animation):
+        from pygame.display import flip
+        from pygame.font import Font
         screen.fill((0, 0, 150))
         font = Font(None, 20)
         self.movement_check(field)

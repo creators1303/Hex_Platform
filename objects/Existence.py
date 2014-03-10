@@ -1,15 +1,7 @@
-from Logic import hex_cube_to_offset
-from File import File
-from states.Exploring import Exploring
-from states.Waiting import Waiting
-from states.Despawning import Despawning
-from states.Attacking import Attacking
-from states.Merging import Merging
-from states.Pursuit import Pursuit
-
-
 class Existence():
     def __init__(self, coord, state):
+        from File import File
+        from Logic import hex_cube_to_offset
         parameters = File(self.__class__.__name__ + '/' + "PARAMETERS.HMinf")
         info = {}
         for each in parameters.info:
@@ -29,6 +21,7 @@ class Existence():
         self.visibility = False
 
     def going(self, field, hexagon):
+        from Logic import hex_cube_to_offset
         if not hexagon in field.objects:
             field.objects[hexagon] = self
             del (field.objects[self.coord])
@@ -49,6 +42,12 @@ class Existence():
         self.current_state.global_update(field)
 
     def state_check(self, field):
+        from states.Exploring import Exploring
+        from states.Waiting import Waiting
+        from states.Despawning import Despawning
+        from states.Attacking import Attacking
+        from states.Merging import Merging
+        from states.Pursuit import Pursuit
         status = self.current_state.global_check(field)
         if status == 2:
             strike = self.current_state.communication

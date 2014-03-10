@@ -1,4 +1,3 @@
-from pygame.time import get_ticks
 from objects.Existence import Existence
 
 
@@ -10,6 +9,7 @@ class Door(Existence):
         self.hard = 500
 
     def virtual_status_change(self, power):
+        from pygame.time import get_ticks
         if not self.opening_time:
             self.opening_time = get_ticks()
         self.opening = (get_ticks() - self.opening_time) * power

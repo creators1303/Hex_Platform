@@ -21,4 +21,3 @@ class Stats():
         for string in relationships.info:
             string = string.split(" ")
             self.relationships[string[0]] = string[1].rstrip('\n')
-        pass

@@ -1,4 +1,3 @@
-from Logic import neighbours_in_radius
 from states.Main import Main
 
 
@@ -12,6 +11,7 @@ class Alone(Main):
         return self.mob.current_state.update(field)
 
     def global_check(self, field):
+        from Logic import neighbours_in_radius
         nearest = neighbours_in_radius(self.mob.coord, 1, field)
         for each in nearest:
             if self.mob.stats.relationships[each.__class__.__name__] == "Attacking":

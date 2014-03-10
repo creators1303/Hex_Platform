@@ -1,7 +1,5 @@
-from Graphic import ImageStorage
-
-
 def process(screen, field):
+    from Graphic import ImageStorage
     storage = ImageStorage()
 
     while True:

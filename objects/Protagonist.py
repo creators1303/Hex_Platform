@@ -1,10 +1,10 @@
 from objects.Existence import Existence
-from objects.Stats import Stats
-from states.PrimaryProtagonist import PrimaryProtagonist
 
 
 class Protagonist(Existence):
     def __init__(self, coord):
+        from objects.Stats import Stats
+        from states.PrimaryProtagonist import PrimaryProtagonist
         Existence.__init__(self, coord, PrimaryProtagonist(self))
         self.stats = Stats(self)
 
