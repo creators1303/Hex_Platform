@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="143b99f4-225d-4f3d-8c93-ebfd64c47b2d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/states/Exploring.py" afterPath="$PROJECT_DIR$/states/Exploring.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/FIELD.HMmap" afterPath="$PROJECT_DIR$/resources/FIELD.HMmap" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Graphic.py" afterPath="$PROJECT_DIR$/Graphic.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="project_rpg.iws" />
@@ -28,7 +31,19 @@
     <favorites_list name="project_rpg" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="main.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="65" selection-start="556" selection-end="556" vertical-scroll-proportion="0.7619048" vertical-offset="51" max-vertical-offset="782">
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -55,8 +70,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/Logic.py" />
         <option value="$PROJECT_DIR$/objects/Antagonist.py" />
         <option value="$PROJECT_DIR$/objects/Door.py" />
         <option value="$PROJECT_DIR$/objects/Existence.py" />
@@ -66,11 +79,13 @@
         <option value="$PROJECT_DIR$/states/Alone.py" />
         <option value="$PROJECT_DIR$/states/Attacking.py" />
         <option value="$PROJECT_DIR$/states/Communication.py" />
-        <option value="$PROJECT_DIR$/states/Exploring.py" />
         <option value="$PROJECT_DIR$/states/PrimaryProtagonist.py" />
         <option value="$PROJECT_DIR$/states/Pursuit.py" />
         <option value="$PROJECT_DIR$/states/Waiting.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/states/Exploring.py" />
+        <option value="$PROJECT_DIR$/Graphic.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -541,7 +556,11 @@
       <created>1394466919306</created>
       <updated>1394466919306</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Version 0.2.4-rebuild.&#10;&#10;Изменение в .gitignore.">
+      <created>1394467018825</created>
+      <updated>1394467018825</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -574,12 +593,12 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328594" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3206951" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18456642" sideWeight="0.6050553" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18456642" sideWeight="0.6050553" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4549763" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3965245" sideWeight="0.11455847" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3949447" sideWeight="0.88544154" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3949447" sideWeight="0.88544154" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328594" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -613,7 +632,8 @@
     <MESSAGE value="Version 0.2.2.&#10;&#10;Рефкторинг и глобальная оптимизация инициализатора окружения.&#10;Оптимизация функции offset_to_cube.&#10;Оптимизация инициализатора камеры." />
     <MESSAGE value="Version 0.2.3.&#10;&#10;Рефакторинг классов динамических объектов.&#10;Оптимизация главного цикла платформы." />
     <MESSAGE value="Version 0.2.4.&#10;&#10;Оптимизация import." />
-    <option name="LAST_COMMIT_MESSAGE" value="Version 0.2.4.&#10;&#10;Оптимизация import." />
+    <MESSAGE value="Version 0.2.4-rebuild.&#10;&#10;Изменение в .gitignore." />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 0.2.4-rebuild.&#10;&#10;Изменение в .gitignore." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -621,27 +641,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/objects/Stats.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="66" selection-start="913" selection-end="913" vertical-scroll-proportion="1.0476191" vertical-offset="0" max-vertical-offset="476">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/objects/Supervisor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="42" selection-start="91" selection-end="91" vertical-scroll-proportion="0.0952381" vertical-offset="0" max-vertical-offset="357">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/objects/Wall.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/states/Alone.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
@@ -666,15 +665,6 @@
     <entry file="file://$PROJECT_DIR$/states/Despawning.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="30" selection-start="64" selection-end="64" vertical-scroll-proportion="0.04761905" vertical-offset="0" max-vertical-offset="374">
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/states/Exploring.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="45" selection-start="665" selection-end="665" vertical-scroll-proportion="0.95238096" vertical-offset="0" max-vertical-offset="1088">
           <folding>
             <element signature="e#0#33#0" expanded="true" />
           </folding>
@@ -725,6 +715,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="21" selection-start="36" selection-end="36" vertical-scroll-proportion="0.0952381" vertical-offset="0" max-vertical-offset="357">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Logic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="128" column="5" selection-start="4187" selection-end="4187" vertical-scroll-proportion="0.0" vertical-offset="2176" max-vertical-offset="7718">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Controller.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
@@ -732,10 +736,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/states/Exploring.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="21" selection-start="36" selection-end="36" vertical-scroll-proportion="0.0952381" vertical-offset="0" max-vertical-offset="357">
+        <state line="1" column="30" selection-start="64" selection-end="64" vertical-scroll-proportion="0.042606518" vertical-offset="0" max-vertical-offset="1037">
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Graphic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="78" column="52" selection-start="3168" selection-end="3168" vertical-scroll-proportion="0.19767442" vertical-offset="1258" max-vertical-offset="2295">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="65" selection-start="556" selection-end="556" vertical-scroll-proportion="0.7619048" vertical-offset="51" max-vertical-offset="782">
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

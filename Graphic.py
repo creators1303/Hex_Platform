@@ -1,5 +1,4 @@
 class ImageStorage():
-
     def __init__(self):
         self.storage = {}
 
@@ -10,12 +9,14 @@ class ImageStorage():
 
     def load_image(self, parameters):
         from Worker import object_image_load
+
         self.storage[parameters[0] + '.HMtex'] = object_image_load(parameters)
 
 
 class Viewer():
     def __init__(self, player, screen):
         from File import File
+
         self.size = list(map(int, File("GRAPHIC.HMinf").get_info(0)))
 
         self.cols = screen.get_width() - self.size[0] * 0.25
@@ -29,11 +30,12 @@ class Viewer():
         self.zone_rows = int(self.rows / 2) + (int(self.rows / 2) + 1) % 2
         self.zone_cols = int(self.cols / 2) + (int(self.cols / 2) + 1) % 2
 
-        self.point = [int(player.offset_coord[0] - (self.zone_rows - 1) / 2), int(player.offset_coord[1] - (self.zone_cols - 1) / 2)]
+        self.point = [int(player.offset_coord[0] - (self.zone_rows - 1) / 2),
+                      int(player.offset_coord[1] - (self.zone_cols - 1) / 2)]
 
         self.lead = player
 
-        self.border_from = False
+        self.border_from = [False, False]
         self.border_to = False
         self.border_pixel = False
 
@@ -46,18 +48,22 @@ class Viewer():
             self.point[1] -= 1
         elif self.lead.offset_coord[1] >= self.point[1] + self.zone_cols:
             self.point[1] += 1
-        self.border_from = [self.point[0] - int((self.rows - self.zone_rows) / 2), self.point[1] - int((self.cols - self.zone_cols) / 2)]
-        if self.border_from[0] < 0:
-            self.border_from[0] = 0
-        if self.border_from[1] < 0:
-            self.border_from[1] = 0
-        self.border_to = [self.border_from[0] + self.rows - 1, self.border_from[1] + self.cols - 1]
+
+        self.border_to = [self.point[0] + self.zone_rows + int((self.rows - self.zone_rows) / 2),
+                          self.point[1] + self.zone_cols + int((self.cols - self.zone_cols) / 2)]
         if self.border_to[0] >= field.rows:
             self.border_to[0] = field.rows - 1
             self.border_from[0] = self.border_to[0] - self.rows + 1
         if self.border_to[1] >= field.columns:
             self.border_to[1] = field.columns - 1
             self.border_from[1] = self.border_to[1] - self.cols + 1
+
+        self.border_from = [self.border_to[0] - self.rows + 1,
+                            self.border_to[1] - self.cols + 1]
+        if self.border_from[0] < 0:
+            self.border_from[0] = 0
+        if self.border_from[1] < 0:
+            self.border_from[1] = 0
 
         self.border_pixel = field.map[self.border_from[0]][self.border_from[1]][2]
         if not self.border_from[1] % 2:
@@ -66,11 +72,12 @@ class Viewer():
     def draw_field(self, screen, field, animation):
         from pygame.display import flip
         from pygame.font import Font
+
         screen.fill((0, 0, 150))
         font = Font(None, 20)
         self.movement_check(field)
-        for ctrl_row in range(self.border_from[0], self.border_to[0] + 1):
-            for ctrl_column in range(self.border_from[1], self.border_to[1] + 1):
+        for ctrl_row in range(self.border_from[0], min(self.border_to[0] + 1, field.rows)):
+            for ctrl_column in range(self.border_from[1], min(self.border_to[1] + 1, self.cols)):
                 parameters = field.map[ctrl_row][ctrl_column][1].image_status()
                 pixel = field.map[ctrl_row][ctrl_column][2][0] - self.border_pixel[0] + self.border_width, \
                         field.map[ctrl_row][ctrl_column][2][1] - self.border_pixel[1] + self.border_height
@@ -86,8 +93,10 @@ class Viewer():
             if self.border_from[0] <= dynamic_object.offset_coord[0] <= self.border_to[0] and self.border_from[1] <= \
                     dynamic_object.offset_coord[1] <= self.border_to[1]:
                 parameters = field.map[dynamic_object.offset_coord[0]][dynamic_object.offset_coord[1]][1].image_status()
-                pixel = field.map[dynamic_object.offset_coord[0]][dynamic_object.offset_coord[1]][2][0] - self.border_pixel[0] + self.border_width, \
-                        field.map[dynamic_object.offset_coord[0]][dynamic_object.offset_coord[1]][2][1] - self.border_pixel[1] + self.border_height
+                pixel = field.map[dynamic_object.offset_coord[0]][dynamic_object.offset_coord[1]][2][0] - \
+                        self.border_pixel[0] + self.border_width, \
+                        field.map[dynamic_object.offset_coord[0]][dynamic_object.offset_coord[1]][2][1] - \
+                        self.border_pixel[1] + self.border_height
                 if parameters[1]:
                     picture = list(dynamic_object.virtual_image_name())
                     picture.append(self.size)

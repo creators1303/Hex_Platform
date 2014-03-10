@@ -1,9 +1,6 @@
 from pygame.time import get_ticks
 from states.Alone import Alone
 
-#TODO: время: поиска пути(если не нашел, то новый гекс) и гекса(если не нашел, то умер)
-
-
 class Exploring(Alone):
     def __init__(self, mob):
         Alone.__init__(self, mob)
