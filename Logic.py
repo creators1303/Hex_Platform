@@ -42,14 +42,15 @@ def __hex_to_coord__(coord, shift):
            (0.5 * ((coord[0] + 1) % 2) + int((coord[0] + 1) / 2) + coord[1]) * sqrt(3) / 2 + shift[1]
 
 
-def __hex_offset_to_cube__(coord):
+def __hex_offset_to_cube__(row, column):
     """
-    @param coord: offset coord of hex
+    @param row: offset row of hex
+    @param column: offset column of hex
     @return: cube coord of hex
     """
-    x = int(coord[1])
-    y = int(coord[0] - (coord[1] + (coord[1] & 1)) / 2)
-    return x, y, (x + y) * -1
+    x = int(column)
+    y = int(row - (column + (column & 1)) / 2)
+    return x, y, - x - y
 
 
 def hex_cube_to_offset(coord):
@@ -83,7 +84,7 @@ def pixel_to_hex(coord, size):
     coord = (x_coord, y_coord)
     x = int(x_coord / 0.75)
     y = int(y_coord - ((x + 1) % 2) * 0.45)
-    hexagon = __hex_offset_to_cube__((y, x))
+    hexagon = __hex_offset_to_cube__(y, x)
     logic_coord1 = __hex_to_coord__(hexagon, (0.5, 0.45))
     logic_coord2 = __hex_to_coord__((hexagon[0] - 1, hexagon[1], hexagon[2] + 1), (0.5, 0.45))
     logic_coord3 = __hex_to_coord__((hexagon[0] - 1, hexagon[1] + 1, hexagon[2]), (0.5, 0.45))
@@ -335,7 +336,7 @@ def ex_path_finding(start_coord, finish_coord, field, avoid):
     close_list = []
     close_coord = []
     for mob in avoid:
-        for coord in __hex_radius__(mob.coord, 2, field):
+        for coord in __hex_radius__(mob.coord, 1, field):
             close_coord.append(coord)
     while open_list:
         work_coord = min(open_list, key=itemgetter(1, 4))
@@ -346,18 +347,6 @@ def ex_path_finding(start_coord, finish_coord, field, avoid):
         for neigh_coord in __hex_neighbours__(work_coord[0]):
             if neigh_coord == start_coord:
                 return work_coord[0]
-                '''g = work_coord[2] + 1
-                h = hex_distance(start_coord, neigh_coord)
-                close_list.append((neigh_coord, g + h, g, h, __line_length__(start_coord, neigh_coord), work_coord[0]))
-                finally_list = [close_list[-1][0]]
-                x = close_list[-1]
-                while x[5]:
-                    finally_list.append(x[5])
-                    for y in close_list:
-                        if y[0] == x[5]:
-                            x = y
-                            break
-                return finally_list[1:]'''
             if not hex_coord_available(neigh_coord, field):
                 continue
             offset_coord = hex_cube_to_offset(neigh_coord)
@@ -385,7 +374,7 @@ def neighbour_finding(start_coord, field, avoid):
     close_coord = []
     coord = list(field.objects.keys())
     for mob in avoid:
-        for coord in __hex_radius__(mob.coord, 1, field):
+        for coord in __hex_radius__(mob.coord, 2, field):
             close_coord.append(coord)
     while open_list:
         work_coord = min(open_list, key=itemgetter(1))

@@ -5,6 +5,7 @@ def process(screen, field):
     storage = ImageStorage()
 
     while True:
+        #TODO: supervisor нормальное состояние, привязка к протагонисту
         for supervisor in field.supervisors:
             supervisor.update(field)
 

@@ -11,36 +11,39 @@ from objects.Supervisor import Supervisor
 
 class Field():
     def __init__(self, screen):
-        fields = File('FIELD.HMmap')
-        size = fields.get_info(0)
-        self.rows, self.columns = int(size[0]), int(size[1])
-        size = File("GRAPHIC.HMinf")
-        size = int(size.get_info(0)[0]), int(size.get_info(0)[1])
+        #TODO: странные циферки в конце файла
+        #TODO: в файле не карта динамических объектов, а объекты по координатам
+        #TODO: файл с параметрами генератора
+        fields = File("FIELD.HMmap")
+        self.rows, self.columns = list(map(int, fields.get_info(0)))
+        size = list(map(int, File("GRAPHIC.HMinf").get_info(0)))
         self.screen = screen
-        self.map = []
+        self.map = [[[[] for parameters in range(3)] for column in range(self.columns)] for row in range(self.rows)]
         self.objects = {}
         self.supervisors = []
         self.camera = None
-        for ctrl_row in range(1, self.rows + 1):
-            static_cell = fields.get_info(ctrl_row)
-            dynamic_cell = fields.get_info(ctrl_row + self.rows + 1)
-            temp_row = []
-            for ctrl_column in range(self.columns):
-                coord = __hex_offset_to_cube__((ctrl_row - 1, ctrl_column))
-                temp_row.append([coord, static_objects(int(static_cell[ctrl_column]), coord), hex_to_pixel(coord, size)])
-                if int(dynamic_cell[ctrl_column]):
-                    self.objects[coord] = self.dynamic_objects(int(dynamic_cell[ctrl_column]), coord)
-            self.map.append(temp_row)
+        for row in range(1, self.rows + 1):
+            static_cell = fields.get_info(row)
+            dynamic_cell = fields.get_info(row + self.rows + 1)
+            for column in range(self.columns):
+                coord = __hex_offset_to_cube__(row - 1, column)
+                self.map[row - 1][column][0] = coord
+                self.map[row - 1][column][1] = static_objects(int(static_cell[column]), coord)
+                self.map[row - 1][column][2] = hex_to_pixel(coord, size)
+                self.dynamic_objects(int(dynamic_cell[column]), coord)
 
     def dynamic_objects(self, number, coord):
-        #TODO: РЕ разобраться с этим предупреждением
         if number == 1:
             thing = Player(coord)
             self.supervisors.append(Supervisor(thing))
             self.camera = Viewer(thing, self.screen)
+            self.objects[coord] = thing
         elif number == 2:
             thing = Mob(coord)
-        return thing
+            self.objects[coord] = thing
+        else:
+            #TODO: вставить исключение
+            pass
 
 
 def static_objects(number, coord):
@@ -54,5 +57,8 @@ def static_objects(number, coord):
         thing = Door(coord)
     elif number == 4:
         thing = Wall(coord, False)
+    else:
+        #TODO: вставить исключение
+        pass
     return thing
 

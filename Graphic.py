@@ -20,9 +20,7 @@ class ImageStorage():
 
 class Viewer():
     def __init__(self, player, screen):
-
-        graphics = File("GRAPHIC.HMinf")
-        self.size = int(graphics.get_info(0)[0]), int(graphics.get_info(0)[1])
+        self.size = list(map(int, File("GRAPHIC.HMinf").get_info(0)))
 
         self.cols = screen.get_width() - self.size[0] * 0.25
         self.border_width = int((self.cols % (self.size[0] * 0.75)) / 2)
