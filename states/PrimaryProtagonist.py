@@ -2,7 +2,7 @@ from Logic import hex_visible_true
 from states.Alone import Alone
 
 
-class PrimaryPlayer(Alone):
+class PrimaryProtagonist(Alone):
     def __init__(self, mob):
         Alone.__init__(self, mob)
 

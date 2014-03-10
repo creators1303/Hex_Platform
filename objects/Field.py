@@ -3,8 +3,8 @@ from Logic import __hex_offset_to_cube__, hex_to_pixel
 from Graphic import Viewer
 from objects.Cell import Cell
 from objects.Door import Door
-from objects.Mob import Mob
-from objects.Player import Player
+from objects.Antagonist import Antagonist
+from objects.Protagonist import Protagonist
 from objects.Wall import Wall
 from objects.Supervisor import Supervisor
 
@@ -34,12 +34,12 @@ class Field():
 
     def dynamic_objects(self, number, coord):
         if number == 1:
-            thing = Player(coord)
+            thing = Protagonist(coord)
             self.supervisors.append(Supervisor(thing))
             self.camera = Viewer(thing, self.screen)
             self.objects[coord] = thing
         elif number == 2:
-            thing = Mob(coord)
+            thing = Antagonist(coord)
             self.objects[coord] = thing
         else:
             #TODO: вставить исключение

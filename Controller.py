@@ -9,14 +9,9 @@ def process(screen, field):
         for supervisor in field.supervisors:
             supervisor.update(field)
 
-        for dynamic_object in list(field.objects.values()):
-            if not dynamic_object.update(field):
-                return
-
-        for dynamic_object in list(field.objects.values()):
-            dynamic_object.state_check(field)
-
-        for dynamic_object in list(field.objects.values()):
-            dynamic_object.alive_check(field)
+        objects = list(field.objects.values())
+        any(obj.update(field) for obj in objects)
+        any(obj.state_check(field) for obj in objects)
+        any(obj.alive_check(field) for obj in objects)
 
         field.camera.draw_field(screen, field, storage)

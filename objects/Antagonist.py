@@ -1,12 +1,12 @@
 from objects.Existence import Existence
 from objects.Stats import Stats
-from states.PrimaryPlayer import PrimaryPlayer
+from states.PrimaryAntagonist import PrimaryAntagonist
 
 
+class Antagonist(Existence):
 
-class Player(Existence):
     def __init__(self, coord):
-        Existence.__init__(self, coord, PrimaryPlayer(self))
+        Existence.__init__(self, coord, PrimaryAntagonist(self))
         self.stats = Stats(self)
 
     @staticmethod
@@ -14,4 +14,4 @@ class Player(Existence):
         pass
 
     def virtual_image_name(self):
-        return self.__class__.__name__ + '/' + self.__class__.__name__, 255
+        return self.__class__.__name__ + '/' + 'self', 255

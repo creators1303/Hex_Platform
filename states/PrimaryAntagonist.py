@@ -1,7 +1,7 @@
 from states.Alone import Alone
 
 
-class PrimaryMob(Alone):
+class PrimaryAntagonist(Alone):
     def __init__(self, mob):
         Alone.__init__(self, mob)
 

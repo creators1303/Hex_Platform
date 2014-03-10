@@ -46,13 +46,11 @@ class Existence():
             self.exploration = True
 
     def update(self, field):
-        return self.current_state.global_update(field)
+        self.current_state.global_update(field)
 
     def state_check(self, field):
         status = self.current_state.global_check(field)
-        if status == 1:
-            return status
-        elif status == 2:
+        if status == 2:
             strike = self.current_state.communication
             self.communication_state = Attacking(self, strike)
             self.current_state = self.communication_state
@@ -61,9 +59,6 @@ class Existence():
             self.communication_state = Merging(self, strike)
             self.current_state = self.communication_state
         else:
-            '''if status == 4:
-                hexagon = self.current_state.hexagon
-                self.alone_state = Walking(self, hexagon, field)'''
             if status == 5:
                 self.alone_state = Waiting(self)
             elif status == 6:
@@ -75,7 +70,6 @@ class Existence():
             elif status == 9:
                 self.current_state = self.alone_state
             self.current_state = self.alone_state
-        return status
 
     def alive_check(self, field):
         if self.health <= 0:
