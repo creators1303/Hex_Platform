@@ -4,26 +4,8 @@
     <option name="FILTER_RESOLVED_ITEMS" value="false" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="143b99f4-225d-4f3d-8c93-ebfd64c47b2d" name="Default" comment="Version 0.2.3.&#10;&#10;Рефакторинг классов динамических объектов.&#10;Оптимизация главного цикла платформы.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/states/Alone.py" afterPath="$PROJECT_DIR$/states/Alone.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/objects/Antagonist.py" afterPath="$PROJECT_DIR$/objects/Antagonist.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/states/Communication.py" afterPath="$PROJECT_DIR$/states/Communication.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Controller.py" afterPath="$PROJECT_DIR$/Controller.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/objects/Door.py" afterPath="$PROJECT_DIR$/objects/Door.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/objects/Existence.py" afterPath="$PROJECT_DIR$/objects/Existence.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/states/Exploring.py" afterPath="$PROJECT_DIR$/states/Exploring.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/FIELD.HMmap" afterPath="$PROJECT_DIR$/resources/FIELD.HMmap" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/File.py" afterPath="$PROJECT_DIR$/File.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Graphic.py" afterPath="$PROJECT_DIR$/Graphic.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Logic.py" afterPath="$PROJECT_DIR$/Logic.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/states/PrimaryProtagonist.py" afterPath="$PROJECT_DIR$/states/PrimaryProtagonist.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/objects/Protagonist.py" afterPath="$PROJECT_DIR$/objects/Protagonist.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/states/Pursuit.py" afterPath="$PROJECT_DIR$/states/Pursuit.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/objects/Stats.py" afterPath="$PROJECT_DIR$/objects/Stats.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/objects/Supervisor.py" afterPath="$PROJECT_DIR$/objects/Supervisor.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/states/Waiting.py" afterPath="$PROJECT_DIR$/states/Waiting.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Worker.py" afterPath="$PROJECT_DIR$/Worker.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
+    <list default="true" id="143b99f4-225d-4f3d-8c93-ebfd64c47b2d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="project_rpg.iws" />
@@ -73,7 +55,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/Graphic.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/Logic.py" />
         <option value="$PROJECT_DIR$/objects/Antagonist.py" />
@@ -89,6 +70,7 @@
         <option value="$PROJECT_DIR$/states/PrimaryProtagonist.py" />
         <option value="$PROJECT_DIR$/states/Pursuit.py" />
         <option value="$PROJECT_DIR$/states/Waiting.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -555,7 +537,11 @@
       <created>1394464929387</created>
       <updated>1394464929387</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Version 0.2.4.&#10;&#10;Оптимизация import.">
+      <created>1394466919306</created>
+      <updated>1394466919306</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -588,11 +574,11 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328594" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3206951" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18456642" sideWeight="0.6050553" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18456642" sideWeight="0.6050553" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4549763" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3965245" sideWeight="0.11455847" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3949447" sideWeight="0.88544154" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3949447" sideWeight="0.88544154" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -626,7 +612,8 @@
     <MESSAGE value="Version 0.2.1.&#10;&#10;Улучшено состояние Исследование.&#10;&#10;Added .gitingore file.&#10;" />
     <MESSAGE value="Version 0.2.2.&#10;&#10;Рефкторинг и глобальная оптимизация инициализатора окружения.&#10;Оптимизация функции offset_to_cube.&#10;Оптимизация инициализатора камеры." />
     <MESSAGE value="Version 0.2.3.&#10;&#10;Рефакторинг классов динамических объектов.&#10;Оптимизация главного цикла платформы." />
-    <option name="LAST_COMMIT_MESSAGE" value="Version 0.2.3.&#10;&#10;Рефакторинг классов динамических объектов.&#10;Оптимизация главного цикла платформы." />
+    <MESSAGE value="Version 0.2.4.&#10;&#10;Оптимизация import." />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 0.2.4.&#10;&#10;Оптимизация import." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -634,13 +621,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/objects/Protagonist.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="8" selection-start="151" selection-end="151" vertical-scroll-proportion="0.2857143" vertical-offset="0" max-vertical-offset="374">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/objects/Stats.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="66" selection-start="913" selection-end="913" vertical-scroll-proportion="1.0476191" vertical-offset="0" max-vertical-offset="476">
@@ -748,6 +728,13 @@
     <entry file="file://$PROJECT_DIR$/Controller.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="21" selection-start="36" selection-end="36" vertical-scroll-proportion="0.0952381" vertical-offset="0" max-vertical-offset="357">
           <folding />
         </state>
       </provider>
