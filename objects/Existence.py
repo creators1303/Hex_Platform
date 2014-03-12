@@ -72,7 +72,7 @@ class Existence():
 
     def alive_check(self, field):
         if self.health <= 0:
-            del (field.objects[self.coord])
+            del field.objects[self.coord]
 
     def image_status(self):
         if not self.exploration:
