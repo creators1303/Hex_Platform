@@ -24,4 +24,7 @@ class Alone(Main):
         for each in nearest:
             if not self.mob.relationships_check(each) and self.mob.stats.relationships[each.__class__.__name__] == "Attacking":
                 self.avoid.append(each)
+        for each in self.avoid:
+            if each.health <= 0:
+                self.avoid.remove(each)
         return self.mob.current_state.check(field)

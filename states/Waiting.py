@@ -5,18 +5,24 @@ class Waiting(Alone):
     def __init__(self, mob):
         Alone.__init__(self, mob)
         self.hexagon = False
-        self.quit = False
+        self.quit = True
 
     def update(self, field):
-        from pygame.constants import QUIT, KEYDOWN, K_ESCAPE, MOUSEBUTTONUP
+        from pygame.constants import KEYDOWN, MOUSEBUTTONUP, K_EQUALS, K_MINUS, K_ESCAPE
         from pygame.event import poll, clear
+
+        field.camera.set_lead(self.mob.leads[self.mob.current_lead])
         new_event = poll()
-        if new_event.type == QUIT:
-            self.quit = True
-        elif new_event.type == KEYDOWN:
-            if new_event.key == K_ESCAPE:
-                from pygame.display import iconify
-                iconify()
+        if new_event.type == KEYDOWN:
+            if new_event.key == K_EQUALS:
+                self.mob.current_lead += 1
+                self.mob.current_lead %= len(self.mob.leads)
+            elif new_event.key == K_MINUS:
+                self.mob.current_lead -= 1
+                self.mob.current_lead %= len(self.mob.leads)
+            elif new_event.key == K_ESCAPE:
+                from Interaction import pause_menu
+                return pause_menu(field.screen)
         elif new_event.type == MOUSEBUTTONUP:
             if new_event.button == 1:
                 from Logic import pixel_to_hex, hex_cube_to_offset, hex_coord_available
@@ -29,7 +35,7 @@ class Waiting(Alone):
         clear()
         return True
 
-    def check(self, field):
+    '''def check(self, field):
         if self.hexagon:
             return 4
-        return not self.quit
+        return self.quit'''

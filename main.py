@@ -14,7 +14,7 @@ from Graphic import Menu
 
 def start_menu():
     init()
-    screen = set_mode(list_modes()[0], FULLSCREEN)
+    screen = set_mode(list_modes()[0])#, FULLSCREEN)
     set_caption("Hero Misadventures")
     menu = Menu(("New Field", "Load Field", "Quit"), screen, 120)
     while True:

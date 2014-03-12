@@ -7,6 +7,9 @@ class Communication(Main):
         self.communication = strike
 
     def global_update(self, field):
+        from Logic import hex_visible_true
+        if self.mob.stats.view_radius:
+            hex_visible_true(field, self.mob.coord, self.mob.stats.view_radius)
         return self.mob.current_state.update(field)
 
     def global_check(self, field):

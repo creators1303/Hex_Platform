@@ -207,7 +207,8 @@ def hexagon_visible(shadows, hexagon, field):
         field.map[coord_offset[0]][coord_offset[1]][1].visible_change(2)
     else:
         coord_offset = hex_cube_to_offset(hexagon[0])
-        field.map[coord_offset[0]][coord_offset[1]][1].visible_change(1)
+        if field.map[coord_offset[0]][coord_offset[1]][1].visibility != 2:
+            field.map[coord_offset[0]][coord_offset[1]][1].visible_change(1)
 
 
 def hex_visible_true(field, coord, radius):

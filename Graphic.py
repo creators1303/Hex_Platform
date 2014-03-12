@@ -85,7 +85,7 @@ class ImageStorage():
 
 
 class Viewer():
-    def __init__(self, player, screen):
+    def __init__(self, screen):
         from File import File
 
         self.size = list(map(int, File("GRAPHIC.HMinf").get_info(0)))
@@ -100,15 +100,20 @@ class Viewer():
 
         self.zone_rows = int(self.rows / 2) + (int(self.rows / 2) + 1) % 2
         self.zone_cols = int(self.cols / 2) + (int(self.cols / 2) + 1) % 2
+        self.point = None
+        self.lead = None
+        self.border_from = [None, None]
+        self.border_to = None
+        self.border_pixel = None
 
-        self.point = [int(player.offset_coord[0] - (self.zone_rows - 1) / 2),
-                      int(player.offset_coord[1] - (self.zone_cols - 1) / 2)]
-
-        self.lead = player
-
-        self.border_from = [False, False]
-        self.border_to = False
-        self.border_pixel = False
+    def set_lead(self, lead):
+        if self.lead != lead:
+            self.point = [int(lead.offset_coord[0] - (self.zone_rows - 1) / 2),
+                          int(lead.offset_coord[1] - (self.zone_cols - 1) / 2)]
+            self.lead = lead
+            self.border_from = [False, False]
+            self.border_to = False
+            self.border_pixel = False
 
     def movement_check(self, field):
         if self.lead.offset_coord[0] < self.point[0]:

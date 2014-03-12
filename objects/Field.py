@@ -1,12 +1,12 @@
 from File import File
 from Logic import __hex_offset_to_cube__, hex_to_pixel
-from Graphic import Viewer
 from objects.Cell import Cell
 from objects.Door import Door
 from objects.Antagonist import Antagonist
 from objects.Protagonist import Protagonist
 from objects.Wall import Wall
 from objects.Supervisor import Supervisor
+from Graphic import Viewer
 
 
 class Field():
@@ -20,8 +20,8 @@ class Field():
         self.screen = screen
         self.map = [[[[] for parameters in range(3)] for column in range(self.columns)] for row in range(self.rows)]
         self.objects = {}
-        self.supervisors = []
-        self.camera = None
+        self.supervisors = [Supervisor()]
+        self.camera = Viewer(screen)
         for row in range(1, self.rows + 1):
             static_cell = fields.get_info(row)
             dynamic_cell = fields.get_info(row + self.rows + 1)
@@ -35,9 +35,8 @@ class Field():
     def dynamic_objects(self, number, coord):
         if number == 1:
             thing = Protagonist(coord)
-            self.supervisors.append(Supervisor(thing))
-            self.camera = Viewer(thing, self.screen)
             self.objects[coord] = thing
+            self.supervisors[0].add_lead(thing)
         elif number == 2:
             thing = Antagonist(coord)
             self.objects[coord] = thing

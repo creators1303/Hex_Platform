@@ -49,6 +49,8 @@ class Existence():
         from states.Merging import Merging
         from states.Pursuit import Pursuit
         status = self.current_state.global_check(field)
+        if status == 1:
+            return
         if status == 2:
             strike = self.current_state.communication
             self.communication_state = Attacking(self, strike)
@@ -67,11 +69,13 @@ class Existence():
             elif status == 8:
                 self.alone_state = Despawning(self)
             elif status == 9:
-                self.current_state = self.alone_state
+                pass
             self.current_state = self.alone_state
 
     def alive_check(self, field):
         if self.health <= 0:
+            from Logic import hex_visible_false
+            hex_visible_false(field, self.coord, self.stats.view_radius)
             del field.objects[self.coord]
 
     def image_status(self):

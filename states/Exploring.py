@@ -1,6 +1,7 @@
 from pygame.time import get_ticks
 from states.Alone import Alone
 
+
 class Exploring(Alone):
     def __init__(self, mob):
         Alone.__init__(self, mob)
@@ -32,14 +33,15 @@ class Exploring(Alone):
             if not field.map[coord[0]][coord[1]][1].passability:
                 field.map[coord[0]][coord[1]][1].virtual_status_change(1)
             else:
-                from Logic import hex_visible_false, hex_visible_true
+                from Logic import hex_visible_false
                 hex_visible_false(field, self.mob.coord, self.mob.stats.view_radius)
                 self.mob.going(field, path)
-                hex_visible_true(field, self.mob.coord, self.mob.stats.view_radius)
                 self.step_time = get_ticks()
         return True
 
     def check(self, field):
+        from Logic import hex_visible_true
+        hex_visible_true(field, self.mob.coord, self.mob.stats.view_radius)
         if self.hexagon:
             from Logic import hex_cube_to_offset
             coord = hex_cube_to_offset(self.hexagon)
