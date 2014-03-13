@@ -12,6 +12,7 @@ class Alone(Main):
 
     def global_check(self, field):
         from Logic import neighbours_in_radius
+
         nearest = neighbours_in_radius(self.mob.coord, 1, field)
         for each in nearest:
             if self.mob.stats.relationships[each.__class__.__name__] == "Attacking":
@@ -22,7 +23,8 @@ class Alone(Main):
                 return 3
         nearest = neighbours_in_radius(self.mob.coord, 3, field)
         for each in nearest:
-            if not self.mob.relationships_check(each) and self.mob.stats.relationships[each.__class__.__name__] == "Attacking":
+            if not self.mob.relationships_check(each) and self.mob.stats.relationships[
+                each.__class__.__name__] == "Attacking" and not each in self.avoid:
                 self.avoid.append(each)
         for each in self.avoid:
             if each.health <= 0:

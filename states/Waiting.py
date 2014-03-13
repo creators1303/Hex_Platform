@@ -22,7 +22,7 @@ class Waiting(Alone):
                 self.mob.current_lead %= len(self.mob.leads)
             elif new_event.key == K_ESCAPE:
                 from Interaction import pause_menu
-                return pause_menu(field.screen)
+                return pause_menu(field.screen, field)
         elif new_event.type == MOUSEBUTTONUP:
             if new_event.button == 1:
                 from Logic import pixel_to_hex, hex_cube_to_offset, hex_coord_available

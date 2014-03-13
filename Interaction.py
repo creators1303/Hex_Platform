@@ -3,8 +3,8 @@ from pygame.event import poll, clear
 from Graphic import Menu
 
 
-def pause_menu(screen):
-    menu = Menu(("Continue", "Quit"), screen, 120)
+def pause_menu(screen, field):
+    menu = Menu(("Continue", "Save", "Quit"), screen, 120)
     while True:
         menu.draw(0)
         event = poll()
@@ -18,5 +18,9 @@ def pause_menu(screen):
                 if choose == 0:
                     return True
                 if choose == 1:
+                    from pickle import dump
+                    dump(field, open("resources/SAVE.HMsave", "wb"))
+                    return True
+                if choose == 2:
                     return False
         clear()

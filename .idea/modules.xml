@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/project_rpg.iml" filepath="$PROJECT_DIR$/.idea/project_rpg.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Hex_Platform.iml" filepath="$PROJECT_DIR$/.idea/Hex_Platform.iml" />
     </modules>
   </component>
 </project>

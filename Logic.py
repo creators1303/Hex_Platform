@@ -376,16 +376,18 @@ def neighbour_finding(start_coord, field, avoid):
     open_coord = [start_coord]
     close_list = []
     close_coord = []
-    coord = list(field.objects.keys())
+    coordinates = list(field.objects.keys())
     for mob in avoid:
+        #coordinates.remove(mob.coord)
         for coord in __hex_radius__(mob.coord, 2, field):
             close_coord.append(coord)
+    if len(avoid) == len(coordinates) - 1:
+        return False
     while open_list:
         work_coord = min(open_list, key=itemgetter(1))
         close_list.append(work_coord)
-        if work_coord[0] in coord and work_coord[0] != start_coord:
-            if not field.objects[work_coord[0]] in avoid:
-                return field.objects[work_coord[0]]
+        if work_coord[0] in coordinates and work_coord[0] != start_coord:
+            return field.objects[work_coord[0]]
         close_coord.append(work_coord[0])
         open_coord.remove(work_coord[0])
         open_list.remove(work_coord)

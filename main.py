@@ -14,7 +14,7 @@ from Graphic import Menu
 
 def start_menu():
     init()
-    screen = set_mode(list_modes()[0])#, FULLSCREEN)
+    screen = set_mode(list_modes()[0], FULLSCREEN)
     set_caption("Hero Misadventures")
     menu = Menu(("New Field", "Load Field", "Quit"), screen, 120)
     while True:
@@ -28,11 +28,12 @@ def start_menu():
             if event.key == K_RETURN:
                 choose = menu.get_position()
                 if choose == 0:
-                    #cdll.LoadLibrary("Generator.dll").main_generator(50, 50)
+                    cdll.LoadLibrary("Generator.dll").main_generator()
                     field = Field(screen)
                     process(screen, field)
                 if choose == 1:
                     field = load(open("resources/SAVE.HMsave", "rb"))
+                    field.screen = screen
                     process(screen, field)
                 if choose == 2:
                     return
@@ -44,10 +45,10 @@ def main():
     start_menu()
 
 if __name__ == "__main__":
-    '''import cProfile
+    import cProfile
     import pstats
     cProfile.run("main()", 'testing/profile.txt')
     p = pstats.Stats('testing/profile.txt')
-    p.sort_stats('cumulative')
-    p.print_stats()'''
-    main()
+    p.sort_stats('time')
+    p.print_stats()
+    #main()
