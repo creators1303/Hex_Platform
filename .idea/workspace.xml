@@ -2,23 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1cc55482-fdc8-41d2-946a-b2a9c57c998d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/Hex_Platform.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ololo.txt" />
-      <change type="DELETED" beforePath="C:\Users\Учитель\Desktop\Hex_Platform\.idea\HeroMisadventures.iml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Учитель\Desktop\Hex_Platform\.idea\dictionaries\.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Учитель\Desktop\Hex_Platform\.idea\project_rpg.iml" afterPath="" />
+      <change type="MOVED" beforePath="C:\Users\Учитель\Desktop\Hex_Platform\ololo.txt" afterPath="$PROJECT_DIR$/resources/GENERATOR.HMinf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Generator.dll" afterPath="$PROJECT_DIR$/Generator.dll" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/states/Alone.py" afterPath="$PROJECT_DIR$/states/Alone.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/states/Communication.py" afterPath="$PROJECT_DIR$/states/Communication.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Interaction.py" afterPath="$PROJECT_DIR$/Interaction.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Logic.py" afterPath="$PROJECT_DIR$/Logic.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/Antagonist/SKILLS.HMinf" afterPath="$PROJECT_DIR$/resources/Antagonist/SKILLS.HMinf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/Protagonist/SKILLS.HMinf" afterPath="$PROJECT_DIR$/resources/Protagonist/SKILLS.HMinf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/states/Waiting.py" afterPath="$PROJECT_DIR$/states/Waiting.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Hex_Platform.iws" />
@@ -45,7 +31,7 @@
       <file leaf-file-name="main.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="23" selection-start="677" selection-end="677" vertical-scroll-proportion="0.5483871" vertical-offset="0" max-vertical-offset="816">
+            <state line="28" column="26" selection-start="813" selection-end="813" vertical-scroll-proportion="0.72069824" vertical-offset="0" max-vertical-offset="816">
               <folding />
             </state>
           </provider>
@@ -72,8 +58,8 @@
         <option value="$PROJECT_DIR$/ololo.txt" />
         <option value="$PROJECT_DIR$/states/Alone.py" />
         <option value="$PROJECT_DIR$/Logic.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/objects/Field.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -137,7 +123,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="objects" />
+              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -154,6 +140,12 @@
     <option name="myPythonConsoleState">
       <PyConsoleSettings />
     </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Учитель\Desktop\Hex_Platform\resources" />
+      <recent name="C:\Users\Учитель\Desktop\Hex_Platform" />
+    </key>
   </component>
   <component name="RunManager" selected="Python.main">
     <configuration default="false" name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -330,22 +322,28 @@
       <created>1394722128777</created>
       <updated>1394722128777</updated>
     </task>
+    <task id="LOCAL-00001" summary="Version 0.3.3.&#10;&#10;Добавлена возможность сохранения.&#10;Оптимизирована функция поиска соседей.&#10;">
+      <created>1394727691526</created>
+      <updated>1394727691526</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="786" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32913387" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24980111" sideWeight="0.6755906" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24980111" sideWeight="0.67456555" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32440946" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32543445" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -362,6 +360,8 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
+    <MESSAGE value="Version 0.3.3.&#10;&#10;Добавлена возможность сохранения.&#10;Оптимизирована функция поиска соседей.&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 0.3.3.&#10;&#10;Добавлена возможность сохранения.&#10;Оптимизирована функция поиска соседей.&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -383,7 +383,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ololo.txt">
+    <entry file="file://$PROJECT_DIR$/resources/GENERATOR.HMinf">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="11" selection-start="11" selection-end="11" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="119">
           <folding />
@@ -416,13 +416,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ololo.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="7" selection-start="7" selection-end="7" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="403">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/states/Pursuit.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="74" selection-start="437" selection-end="437" vertical-scroll-proportion="0.59057075" vertical-offset="0" max-vertical-offset="799">
@@ -451,9 +444,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/testing/profile.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4760">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/GENERATOR.HMinf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="7" selection-start="7" selection-end="7" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="403">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="23" selection-start="677" selection-end="677" vertical-scroll-proportion="0.5483871" vertical-offset="0" max-vertical-offset="816">
+        <state line="28" column="26" selection-start="813" selection-end="813" vertical-scroll-proportion="0.72069824" vertical-offset="0" max-vertical-offset="816">
           <folding />
         </state>
       </provider>
