@@ -12,6 +12,9 @@ class Alone(Main):
 
     def global_check(self, field):
         from Logic import neighbours_in_radius
+        if self.mob.stats.view_radius:
+            from Logic import hex_visible_true
+            hex_visible_true(field, self.mob.coord, self.mob.stats.view_radius)
 
         nearest = neighbours_in_radius(self.mob.coord, 1, field)
         for each in nearest:

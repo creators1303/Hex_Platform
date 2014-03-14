@@ -6,10 +6,5 @@ class PrimarySupervisor(Alone):
         Alone.__init__(self, mob)
 
     def update(self, field):
-        from Graphic import Viewer
-        field.camera = Viewer()
-        return True
-
-    @staticmethod
-    def check(field):
-        return 7
+        field.camera.set_lead(self.mob.leads[self.mob.current_lead])
+        return 5

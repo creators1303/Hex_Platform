@@ -38,7 +38,7 @@ class Existence():
         if status:
             self.exploration = True
 
-    def update(self, field):
+    def state_update(self, field):
         self.current_state.global_update(field)
 
     def state_check(self, field):

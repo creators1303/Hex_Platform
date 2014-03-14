@@ -1,5 +1,5 @@
 class Menu:
-    def __init__(self, buttons, screen, font_size=32, text_color=(0, 0, 255), selection_color=(0, 150, 0),
+    def __init__(self, buttons, screen, font_size=120, text_color=(0, 0, 255), selection_color=(0, 150, 0),
                  surface=(0, 200, 50)):
         from pygame.font import Font
 
@@ -67,6 +67,20 @@ class Menu:
         self.surface.blit(menu_surface, self.shift)
         flip()
         return self.current_position
+
+    def update(self):
+        from pygame.constants import KEYDOWN, K_UP, K_DOWN, K_RETURN
+        from pygame.event import poll
+        self.draw(0)
+        while True:
+            event = poll()
+            if event.type == KEYDOWN:
+                if event.key == K_UP:
+                    self.draw(-1)
+                if event.key == K_DOWN:
+                    self.draw(1)
+                if event.key == K_RETURN:
+                    return self.get_position()
 
 
 class ImageStorage():
@@ -178,24 +192,4 @@ class Viewer():
                         screen.blit(text, pixel)
                         text = font.render(str(dynamic_object.health), 1, (255, 0, 0))
                         screen.blit(text, (pixel[0] + self.size[0] * 0.75, pixel[1]))
-
-        '''for ctrl_row in range(self.border_from[0], self.border_to[0] + 1):
-            for ctrl_column in range(self.border_from[1], self.border_to[1] + 1):
-                pixel = field.map[ctrl_row][ctrl_column][2][0] - self.border_pixel[0] + self.border_width, \
-                        field.map[ctrl_row][ctrl_column][2][1] - self.border_pixel[1] + self.border_height
-                picture = list(field.map[ctrl_row][ctrl_column][1].virtual_image_name())
-                picture.append(self.size)
-                screen.blit(animation.get_image(picture), pixel)
-        for dynamic_object in field.objects.values():
-            if self.border_from[0] <= dynamic_object.offset_coord[0] <= self.border_to[0] and self.border_from[1] <= \
-                    dynamic_object.offset_coord[1] <= self.border_to[1]:
-                pixel = field.map[dynamic_object.offset_coord[0]][dynamic_object.offset_coord[1]][2][0] - self.border_pixel[0] + self.border_width, \
-                        field.map[dynamic_object.offset_coord[0]][dynamic_object.offset_coord[1]][2][1] - self.border_pixel[1] + self.border_height
-                picture = list(dynamic_object.virtual_image_name())
-                picture.append(self.size)
-                screen.blit(animation.get_image(picture), pixel)
-                text = font.render(str(dynamic_object.level), 1, (255, 255, 0))
-                screen.blit(text, pixel)
-                text = font.render(str(dynamic_object.health), 1, (255, 0, 0))
-                screen.blit(text, (pixel[0] + self.size[0] * 0.75, pixel[1]))'''
         flip()

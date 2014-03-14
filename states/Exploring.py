@@ -40,8 +40,6 @@ class Exploring(Alone):
         return True
 
     def check(self, field):
-        from Logic import hex_visible_true
-        hex_visible_true(field, self.mob.coord, self.mob.stats.view_radius)
         if self.hexagon:
             from Logic import hex_cube_to_offset
             coord = hex_cube_to_offset(self.hexagon)

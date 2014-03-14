@@ -5,11 +5,11 @@ def process(screen, field):
     while True:
         #TODO: supervisor нормальное состояние, привязка к протагонисту
         for supervisor in field.supervisors:
-            if not supervisor.update(field):
+            if not supervisor.state_update(field):
                 return
 
         objects = list(field.objects.values())
-        any(obj.update(field) for obj in objects)
+        any(obj.state_update(field) for obj in objects)
         any(obj.state_check(field) for obj in objects)
         any(obj.alive_check(field) for obj in objects)
 
