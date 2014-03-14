@@ -16,6 +16,7 @@ class Menu:
         self.menu_height = 0
         self.surface = screen
         self.font = Font(None, self.font_size)
+
         for i in range(self.number_buttons):
             self.info_list[i].text = self.buttons[i]
             self.info_list[i].text_surface = self.font.render(self.info_list[i].text, 1, self.text_color)
@@ -66,7 +67,6 @@ class Menu:
             menu_surface.blit(self.info_list[i].text_surface, self.info_list[i].text_rect)
         self.surface.blit(menu_surface, self.shift)
         flip()
-        return self.current_position
 
     def update(self):
         from pygame.constants import KEYDOWN, K_UP, K_DOWN, K_RETURN
