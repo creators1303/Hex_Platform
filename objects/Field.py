@@ -11,9 +11,7 @@ from Graphic import Viewer
 
 class Field():
     def __init__(self, screen):
-        #TODO: странные циферки в конце файла
         #TODO: в файле не карта динамических объектов, а объекты по координатам
-        #TODO: файл с параметрами генератора
         fields = File("FIELD.HMmap")
         self.rows, self.columns = list(map(int, fields.get_info(0)))
         size = list(map(int, File("GRAPHIC.HMinf").get_info(0)))

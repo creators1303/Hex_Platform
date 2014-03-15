@@ -34,8 +34,3 @@ class Waiting(Alone):
                     self.hexagon = hexagon
         clear()
         return True
-
-    '''def check(self, field):
-        if self.hexagon:
-            return 4
-        return self.quit'''

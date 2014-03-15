@@ -29,7 +29,7 @@ class Existence():
             self.offset_coord = hex_cube_to_offset(hexagon)
 
     def relationships_check(self, mob):
-        if mob.health > self.health:
+        if mob.health >= self.health:
             return False
         return True
 
@@ -80,9 +80,9 @@ class Existence():
 
     def image_status(self):
         if not self.exploration:
-            return False, False, False, 'fog/' + 'fog_incognito', 255
+            return False, False, False, 'Fog/' + 'fog_incognito', 255
         if not self.visibility:
-            return True, False, False, 'fog/' + 'fog_war', 150
+            return True, False, False, 'Fog/' + 'fog_war', 150
         if self.visibility == 1:
-            return True, True, False, 'fog/' + 'fog', 50
+            return True, True, False, 'Fog/' + 'Fog', 50
         return True, True, True, False

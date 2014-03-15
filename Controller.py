@@ -3,7 +3,6 @@ def process(screen, field):
     storage = ImageStorage()
 
     while True:
-        #TODO: supervisor нормальное состояние, привязка к протагонисту
         for supervisor in field.supervisors:
             if not supervisor.state_update(field):
                 return
