@@ -1,0 +1,9 @@
+{
+    "view_radius": 4,
+    "step_time": 250,
+    "kick_time": 500,
+    "merge_time": 0,
+    "find_time": 10000,
+    "despawn_time": 5000,
+    "path_time": 2000
+}

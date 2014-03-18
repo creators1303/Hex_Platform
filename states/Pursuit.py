@@ -1,9 +1,9 @@
-from pygame.time import get_ticks
 from states.Alone import Alone
 
 
 class Pursuit(Alone):
     def __init__(self, mob):
+        from pygame.time import get_ticks
         Alone.__init__(self, mob)
         self.find = 0
         self.strike = False
@@ -20,6 +20,7 @@ class Pursuit(Alone):
         return True
 
     def going(self, field):
+        from pygame.time import get_ticks
         from Logic import path_finding
         self.path = path_finding(self.mob.coord, self.strike.coord, field, self.avoid)
         if self.path and get_ticks() - self.step >= self.mob.stats.step_time:

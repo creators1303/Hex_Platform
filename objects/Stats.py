@@ -1,23 +1,14 @@
-from File import File
-
-
 class Stats():
     def __init__(self, obj):
-        skills = File(obj.__class__.__name__ + '/' + "SKILLS.HMinf")
-        relationships = File(obj.__class__.__name__ + '/' + "RELATIONSHIPS.HMinf")
-        skills_dict = {}
-        for string in skills.info:
-            string = string.split(" ")
-            skills_dict[string[0]] = int(string[1])
-        self.view_radius = skills_dict["view_radius"]
-        self.step_time = skills_dict["step_time"]
-        self.kick_time = skills_dict["kick_time"]
-        self.merge_time = skills_dict["merge_time"]
-        self.find_time = skills_dict["find_time"]
-        self.despawn_time = skills_dict["despawn_time"]
-        self.path_time = skills_dict["path_time"]
-
-        self.relationships = {}
-        for string in relationships.info:
-            string = string.split(" ")
-            self.relationships[string[0]] = string[1].rstrip('\n')
+        from json import load
+        file = open("resources/" + obj.__class__.__name__ + "/" + "SKILLS.json")
+        info = load(file)
+        self.view_radius = info["view_radius"]
+        self.step_time = info["step_time"]
+        self.kick_time = info["kick_time"]
+        self.merge_time = info["merge_time"]
+        self.find_time = info["find_time"]
+        self.despawn_time = info["despawn_time"]
+        self.path_time = info["path_time"]
+        file = open("resources/" + obj.__class__.__name__ + "/" + "RELATIONSHIPS.json")
+        self.relationships = load(file)

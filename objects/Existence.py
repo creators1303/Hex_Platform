@@ -1,32 +1,31 @@
 class Existence():
     def __init__(self, coord, state):
-        from File import File
         from Logic import hex_cube_to_offset
-        parameters = File(self.__class__.__name__ + '/' + "PARAMETERS.HMinf")
-        info = {}
-        for each in parameters.info:
-            each = each.split(" ")
-            info[each[0]] = int(each[1])
+        from json import load
         self.alone_state = state
         self.communication_state = False
         self.current_state = self.alone_state
         self.coord = coord
         self.offset_coord = hex_cube_to_offset(coord)
-        self.passability = info["passability"]
-        self.transparency = info["transparency"]
-        self.passability_change = info["passability_change"]
-        self.level = info["level"]
-        self.health = info["health"]
+        file = open("resources/" + self.__class__.__name__ + "/" + "PARAMETERS.json")
+        parameters = load(file)
+        self.passability = parameters["passability"]
+        self.transparency = parameters["transparency"]
+        self.passability_change = parameters["passability_change"]
+        self.level = parameters["level"]
+        self.health = parameters["health"]
         self.exploration = False
         self.visibility = False
 
     def going(self, field, hexagon):
-        from Logic import hex_cube_to_offset
         if not hexagon in field.objects:
+            from Logic import hex_cube_to_offset
             field.objects[hexagon] = self
             del (field.objects[self.coord])
             self.coord = hexagon
             self.offset_coord = hex_cube_to_offset(hexagon)
+        else:
+            print('BUG HERE')
 
     def relationships_check(self, mob):
         if mob.health >= self.health:
@@ -42,34 +41,32 @@ class Existence():
         self.current_state.global_update(field)
 
     def state_check(self, field):
-        from states.Exploring import Exploring
-        from states.Waiting import Waiting
-        from states.Despawning import Despawning
-        from states.Attacking import Attacking
-        from states.Merging import Merging
-        from states.Pursuit import Pursuit
         status = self.current_state.global_check(field)
         if status == 1:
             return
         if status == 2:
+            from states.Attacking import Attacking
             strike = self.current_state.communication
             self.communication_state = Attacking(self, strike)
             self.current_state = self.communication_state
         elif status == 3:
+            from states.Merging import Merging
             strike = self.current_state.communication
             self.communication_state = Merging(self, strike)
             self.current_state = self.communication_state
         else:
             if status == 5:
+                from states.Waiting import Waiting
                 self.alone_state = Waiting(self)
             elif status == 6:
+                from states.Exploring import Exploring
                 self.alone_state = Exploring(self)
             elif status == 7:
+                from states.Pursuit import Pursuit
                 self.alone_state = Pursuit(self)
             elif status == 8:
+                from states.Despawning import Despawning
                 self.alone_state = Despawning(self)
-            elif status == 9:
-                pass
             self.current_state = self.alone_state
 
     def alive_check(self, field):

@@ -7,7 +7,7 @@ class Wall(Existence):
         self.destructible = destructible
 
     @staticmethod
-    def status_change():
+    def virtual_status_change():
         pass
 
     def virtual_image_name(self):
