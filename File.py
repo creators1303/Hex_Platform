@@ -1,8 +1,8 @@
 class File():
     def __init__(self, name):
         try:
-            self.file = open('resources/' + name)
-            self.info = self.file.readlines()
+            file = open('resources/' + name)
+            self.info = file.readlines()
         except IOError:
             from Worker import error_message
             error_message("Loading:", "not found " + name)

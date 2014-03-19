@@ -2,6 +2,7 @@ from math import sqrt, degrees, atan
 
 
 def __line_length__(coord1, coord2):
+    #TODO: как можно оптимизировать нахождние расстояние между точками
     """
     @param coord1: cube coord of first hex
     @param coord2: cube coord of second hex
@@ -19,7 +20,7 @@ def hex_to_pixel(coord, size):
     @return: XY coord of the start drawing point
     """
     coord = hex_cube_to_offset(coord)
-    return int(coord[1] * size[0] * 0.75), int(size[1] * coord[0] + size[1] * 0.5 * ((coord[1] + 1) % 2))
+    return int(coord[1] * size[0] * 0.75), int(size[1] * (coord[0] + 0.5 * ((coord[1] + 1) % 2)))
 
 
 def hex_distance(coord1, coord2):
@@ -65,34 +66,30 @@ def __hex_neighbours__(coord):
     @param coord: cube coord of hex
     @return: cube coord of neighbours
     """
-    #TODO: может лучше брать из файла один раз?
-    neighbours_coord = [(0, -1, 1), (1, -1, 0), (1, 0, -1), (0, 1, -1), (-1, 1, 0), (-1, 0, 1)]
-    neighbours = []
-    for neighbour in neighbours_coord:
-        neighbours.append((coord[0] + neighbour[0], coord[1] + neighbour[1], coord[2] + neighbour[2]))
-    return neighbours
+    return [tuple([(coordinates[ctrl] + coord[ctrl]) for ctrl in range(3)]) for coordinates in
+            ((0, -1, 1), (1, -1, 0), (1, 0, -1), (0, 1, -1), (-1, 1, 0), (-1, 0, 1))]
 
 
-def pixel_to_hex(coord, size):
+def pixel_to_hex(coord, size, field):
     """
     @param coord: XY coord of point
     @return: cube coord of hex
     """
     x_coord = coord[0] / size[0]
     y_coord = coord[1] / size[1]
-    coord = (x_coord, y_coord)
+    coord = x_coord, y_coord
     x = int(x_coord / 0.75)
     y = int(y_coord - ((x + 1) % 2) * 0.45)
-    hexagon = __hex_offset_to_cube__(y, x)
+    hexagon = field.map[y][x][0]
     logic_coord1 = __hex_to_coord__(hexagon, (0.5, 0.45))
     logic_coord2 = __hex_to_coord__((hexagon[0] - 1, hexagon[1], hexagon[2] + 1), (0.5, 0.45))
     logic_coord3 = __hex_to_coord__((hexagon[0] - 1, hexagon[1] + 1, hexagon[2]), (0.5, 0.45))
     line1 = __line_length__(coord, logic_coord1)
     line2 = __line_length__(coord, logic_coord2)
     line3 = __line_length__(coord, logic_coord3)
-    if line1 < line2 and line1 < line3:
+    if line3 > line1 < line2:
         return hexagon
-    if line2 < line1 and line2 < line3:
+    if line3 > line2 < line1:
         return hexagon[0] - 1, hexagon[1], hexagon[2] + 1
     return hexagon[0] - 1, hexagon[1] + 1, hexagon[2]
 
@@ -104,9 +101,7 @@ def hex_coord_available(coord, field):
     @return: (True) if there exists hex with this coord, else (False)
     """
     coord = hex_cube_to_offset(coord)
-    if 0 <= coord[0] < field.rows and 0 <= coord[1] < field.columns:
-        return True
-    return False
+    return 0 <= coord[0] < field.rows and 0 <= coord[1] < field.columns
 
 
 def __hex_radius__(coord, radius, field):
@@ -149,7 +144,6 @@ def __hex_circle__(coord, radius, field):
 
 
 def __hex_angle__(coord1, coord2):
-    #TODO: попробовать убрать второй elif
     """
     @param coord1: cube coord of first hex
     @param coord2: cube coord of second hex
@@ -172,25 +166,6 @@ def __hex_angle__(coord1, coord2):
         elif coord2[1] < coord1[1]:
             return 180 - shadow_angle
         return shadow_angle + 180
-
-
-def _shadow_optimize_(shadows):
-    #TODO: вставить в проверку видимости
-    from operator import itemgetter
-    shadows.sort(key=itemgetter(0))
-    for ctrl in range(len(shadows) - 1):
-        while True:
-            if ctrl < len(shadows) - 1:
-                if shadows[ctrl][1] >= shadows[ctrl + 1][0]:
-                    if shadows[ctrl][1] < shadows[ctrl + 1][1]:
-                        shadows[ctrl][1] = shadows[ctrl + 1][1]
-                    shadows[ctrl + 1:len(shadows) - 1] = shadows[ctrl + 2:len(shadows)]
-                    del shadows[-1]
-                else:
-                    break
-            else:
-                return shadows
-    return shadows
 
 
 def hexagon_visible(shadows, hexagon, field):
@@ -223,15 +198,15 @@ def hex_visible_true(field, coord, radius):
     coord_offset = hex_cube_to_offset(coord)
     field.map[coord_offset[0]][coord_offset[1]][1].visible_change(2)
     logic_coord1 = __hex_to_coord__(coord, (0.5, sqrt(3) / 4))
-    for r in range(1, radius + 1):
-        temp_shadows = __hex_circle__(coord, r - 1, field)
+    for r in range(radius):
+        temp_shadows = __hex_circle__(coord, r, field)
         for temp_shadow in temp_shadows:
             coord_offset = hex_cube_to_offset(temp_shadow)
             if not field.map[coord_offset[0]][coord_offset[1]][1].transparency:
                 shadow_angles = []
                 for angle in angles:
                     logic_coord2 = __hex_to_coord__(temp_shadow, angle)
-                    shadow_angles.append(round(__hex_angle__(logic_coord1, logic_coord2), 0))
+                    shadow_angles.append(round(__hex_angle__(logic_coord1, logic_coord2)))
                 max_angle = max(shadow_angles)
                 min_angle = min(shadow_angles)
                 if max_angle - min_angle > 180:
@@ -242,23 +217,31 @@ def hex_visible_true(field, coord, radius):
                 else:
                     shadows.append(list((min_angle, max_angle)))
                     shadows.append(list((min_angle - 360, max_angle - 360)))
-        hexes_coord = __hex_circle__(coord, r, field)
+        hexes_coord = __hex_circle__(coord, r + 1, field)
         hexes = []
         for temp_hex in hexes_coord:
             hex_angles = []
             for angle in angles:
                 logic_coord2 = __hex_to_coord__(temp_hex, angle)
-                hex_angles.append(round(__hex_angle__(logic_coord1, logic_coord2), 0))
+                hex_angles.append(round(__hex_angle__(logic_coord1, logic_coord2)))
             max_angle = max(hex_angles)
             min_angle = min(hex_angles)
-            center_angle = round(__hex_angle__(logic_coord1, __hex_to_coord__(temp_hex, (0.5, sqrt(3) / 4))), 0)
+            center_angle = round(__hex_angle__(logic_coord1, __hex_to_coord__(temp_hex, (0.5, sqrt(3) / 4))))
             if max_angle - min_angle > 180:
                 min_angle = max([shadow_angle for shadow_angle in hex_angles if shadow_angle < 180])
                 max_angle = min([shadow_angle for shadow_angle in hex_angles if shadow_angle > 180])
                 hexes.append((temp_hex, max_angle - 360, min_angle, center_angle))
             else:
                 hexes.append((temp_hex, min_angle, max_angle, center_angle))
-        _shadow_optimize_(shadows)
+        shadows.sort()
+        ctrl = 0
+        while ctrl < len(shadows) - 1:
+            if shadows[ctrl][1] >= shadows[ctrl + 1][0]:
+                if shadows[ctrl][1] < shadows[ctrl + 1][1]:
+                    shadows[ctrl][1] = shadows[ctrl + 1][1]
+                del shadows[ctrl + 1]
+                ctrl -= 1
+            ctrl += 1
         for hexagon in hexes:
             hexagon_visible(shadows, hexagon, field)
 
@@ -287,6 +270,7 @@ def path_finding(start_coord, finish_coord, field, avoid):
     @return: path between two hexes
     """
     from operator import itemgetter
+
     open_list = [(finish_coord, hex_distance(start_coord, finish_coord), 0,
                   hex_distance(start_coord, finish_coord), __line_length__(start_coord, finish_coord), False)]
     open_coord = [finish_coord]
@@ -333,6 +317,7 @@ def ex_path_finding(start_coord, finish_coord, field, avoid):
     @return: path between two hexes
     """
     from operator import itemgetter
+
     open_list = [(finish_coord, hex_distance(start_coord, finish_coord), 0,
                   hex_distance(start_coord, finish_coord), __line_length__(start_coord, finish_coord), False)]
     open_coord = [finish_coord]
@@ -372,6 +357,7 @@ def neighbour_finding(start_coord, field, avoid):
     @return: most close neighbour
     """
     from operator import itemgetter
+
     open_list = [(start_coord, 0)]
     open_coord = [start_coord]
     close_list = []
@@ -410,6 +396,7 @@ def unexplored_finding(start_coord, field, avoid):
     @return: most close neighbour
     """
     from operator import itemgetter
+
     open_list = [(start_coord, 0)]
     open_coord = [start_coord]
     close_list = []
