@@ -1,3 +1,4 @@
 *.pyc
 testing/
 resources/FIELD.HMmap
+.idea/

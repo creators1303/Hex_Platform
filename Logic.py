@@ -1,16 +1,14 @@
-from math import sqrt, degrees, atan
-
-
 def __line_length__(coord1, coord2):
-    #TODO: как можно оптимизировать нахождние расстояние между точками
     """
     @param coord1: cube coord of first hex
     @param coord2: cube coord of second hex
     @return: logic line length of line between first and second hexes
     """
-    logic_coord1 = __hex_to_coord__(coord1, (0, 0))
-    logic_coord2 = __hex_to_coord__(coord2, (0, 0))
-    return sqrt(pow(logic_coord1[0] - logic_coord2[0], 2) + pow(logic_coord1[1] - logic_coord2[1], 2))
+    from math import hypot
+
+    logic_coord1 = __hex_to_coord__(coord1)
+    logic_coord2 = __hex_to_coord__(coord2)
+    return hypot(logic_coord1[0] - logic_coord2[0], logic_coord1[1] - logic_coord2[1])
 
 
 def hex_to_pixel(coord, size):
@@ -20,7 +18,7 @@ def hex_to_pixel(coord, size):
     @return: XY coord of the start drawing point
     """
     coord = hex_cube_to_offset(coord)
-    return int(coord[1] * size[0] * 0.75), int(size[1] * (coord[0] + 0.5 * ((coord[1] + 1) % 2)))
+    return list(map(int, (coord[1] * size[0] * 0.75, size[1] * (coord[0] + 0.5 * ((coord[1] + 1) % 2)))))
 
 
 def hex_distance(coord1, coord2):
@@ -29,17 +27,17 @@ def hex_distance(coord1, coord2):
     @param coord2: cube coord of goal hex
     @return: distance in steps between two hexes
     """
-    return max(abs(coord1[0] - coord2[0]), abs(coord1[1] - coord2[1]), abs(coord1[2] - coord2[2]))
+    return max([abs(coord1[ctrl] - coord2[ctrl]) for ctrl in range(3)])
 
 
-def __hex_to_coord__(coord, shift):
+def __hex_to_coord__(coord, shift=(0.0, 0.0)):
     """
     @param coord: cube coord of hex
     @param shift: XY coord of shift (to angle or to center)
     @return: XY coord of the logic up-left angle of surface + shift
     """
-    return coord[0] * 0.75 + shift[0], \
-           (0.5 * ((coord[0] + 1) % 2) + int((coord[0] + 1) / 2) + coord[1]) * sqrt(3) / 2 + shift[1]
+    return coord[0] * 0.75 + shift[0], (0.5 * ((coord[0] + 1) % 2) + int((coord[0] + 1) / 2) + coord[
+        1]) * 0.8660254037844386 + shift[1]
 
 
 def __hex_offset_to_cube__(row, column):
@@ -48,8 +46,8 @@ def __hex_offset_to_cube__(row, column):
     @param column: offset column of hex
     @return: cube coord of hex
     """
-    x = int(column)
-    y = int(row - (column + (column & 1)) / 2)
+    x = column
+    y = row - int((column + (column % 2)) / 2)
     return x, y, - x - y
 
 
@@ -149,6 +147,8 @@ def __hex_angle__(coord1, coord2):
     @param coord2: cube coord of second hex
     @return: line angle between two hexes
     """
+    from math import degrees, atan
+
     if coord2[0] == coord1[0]:
         if coord2[1] > coord1[1]:
             return 270
@@ -169,14 +169,12 @@ def __hex_angle__(coord1, coord2):
 
 
 def hexagon_visible(shadows, hexagon, field):
-    #TODO: вставить в проверку видимости
     status = True
-    if shadows:
-        for shadow in shadows:
-            if hexagon[1] > shadow[0] and hexagon[2] < shadow[1]:
-                return
-            if shadow[0] < hexagon[3] < shadow[1]:
-                status = False
+    for shadow in shadows:
+        if hexagon[1] > shadow[0] and hexagon[2] < shadow[1]:
+            return
+        if shadow[0] < hexagon[3] < shadow[1]:
+            status = False
     if status:
         coord_offset = hex_cube_to_offset(hexagon[0])
         field.map[coord_offset[0]][coord_offset[1]][1].visible_change(2)
@@ -193,11 +191,12 @@ def hex_visible_true(field, coord, radius):
     @param coord: cube coord of viewer position
     @param radius: ability to see far
     """
-    angles = [(0.25, 0), (0.75, 0), (1, sqrt(3) / 4), (0.75, sqrt(3) / 2), (0.25, sqrt(3) / 2), (0, sqrt(3) / 4)]
+    angles = [(0.25, 0), (0.75, 0), (1, 0.4330127018922193), (0.75, 0.8660254037844386), (0.25, 0.8660254037844386),
+              (0, 0.4330127018922193)]
     shadows = []
     coord_offset = hex_cube_to_offset(coord)
     field.map[coord_offset[0]][coord_offset[1]][1].visible_change(2)
-    logic_coord1 = __hex_to_coord__(coord, (0.5, sqrt(3) / 4))
+    logic_coord1 = __hex_to_coord__(coord, (0.5, 0.4330127018922193))
     for r in range(radius):
         temp_shadows = __hex_circle__(coord, r, field)
         for temp_shadow in temp_shadows:
@@ -226,7 +225,7 @@ def hex_visible_true(field, coord, radius):
                 hex_angles.append(round(__hex_angle__(logic_coord1, logic_coord2)))
             max_angle = max(hex_angles)
             min_angle = min(hex_angles)
-            center_angle = round(__hex_angle__(logic_coord1, __hex_to_coord__(temp_hex, (0.5, sqrt(3) / 4))))
+            center_angle = round(__hex_angle__(logic_coord1, __hex_to_coord__(temp_hex, (0.5, 0.4330127018922193))))
             if max_angle - min_angle > 180:
                 min_angle = max([shadow_angle for shadow_angle in hex_angles if shadow_angle < 180])
                 max_angle = min([shadow_angle for shadow_angle in hex_angles if shadow_angle > 180])
@@ -364,7 +363,6 @@ def neighbour_finding(start_coord, field, avoid):
     close_coord = []
     coordinates = list(field.objects.keys())
     for mob in avoid:
-        #coordinates.remove(mob.coord)
         for coord in __hex_radius__(mob.coord, 2, field):
             close_coord.append(coord)
     if len(avoid) == len(coordinates) - 1:

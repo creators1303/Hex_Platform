@@ -3,9 +3,8 @@ def process(screen, field):
     storage = ImageStorage()
 
     while True:
-        for supervisor in field.supervisors:
-            if not supervisor.state_update(field):
-                return
+        if not any(obj.state_update(field) for obj in field.supervisors):
+            return
 
         objects = list(field.objects.values())
         any(obj.state_update(field) for obj in objects)

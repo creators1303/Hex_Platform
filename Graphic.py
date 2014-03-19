@@ -71,6 +71,7 @@ class Menu:
     def update(self):
         from pygame.constants import KEYDOWN, K_UP, K_DOWN, K_RETURN
         from pygame.event import poll
+
         self.draw(0)
         while True:
             event = poll()
@@ -138,7 +139,8 @@ class Viewer():
             self.point[1] -= 1
         elif self.lead.offset_coord[1] >= self.point[1] + self.zone_cols:
             self.point[1] += 1
-        self.border_from = [self.point[0] - int((self.rows - self.zone_rows) / 2), self.point[1] - int((self.cols - self.zone_cols) / 2)]
+        self.border_from = [self.point[0] - int((self.rows - self.zone_rows) / 2),
+                            self.point[1] - int((self.cols - self.zone_cols) / 2)]
         if self.border_from[0] < 0:
             self.border_from[0] = 0
         if self.border_from[1] < 0:
@@ -176,13 +178,12 @@ class Viewer():
                     parameters.append(self.size)
                     screen.blit(animation.get_image(parameters), pixel)
         for dynamic_object in field.objects.values():
-            if self.border_from[0] <= dynamic_object.offset_coord[0] <= self.border_to[0] and self.border_from[1] <= \
-                    dynamic_object.offset_coord[1] <= self.border_to[1]:
+            coord = dynamic_object.offset_coord
+            if self.border_from[0] <= coord[0] <= self.border_to[0] and self.border_from[1] <= coord[1] <= \
+                    self.border_to[1]:
                 parameters = field.map[dynamic_object.offset_coord[0]][dynamic_object.offset_coord[1]][1].image_status()
-                pixel = field.map[dynamic_object.offset_coord[0]][dynamic_object.offset_coord[1]][2][0] - \
-                        self.border_pixel[0] + self.border_width, \
-                        field.map[dynamic_object.offset_coord[0]][dynamic_object.offset_coord[1]][2][1] - \
-                        self.border_pixel[1] + self.border_height
+                pixel = field.map[coord[0]][coord[1]][2][0] - self.border_pixel[0] + self.border_width, \
+                        field.map[coord[0]][coord[1]][2][1] - self.border_pixel[1] + self.border_height
                 if parameters[1]:
                     picture = list(dynamic_object.virtual_image_name())
                     picture.append(self.size)
