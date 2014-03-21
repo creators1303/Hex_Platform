@@ -24,9 +24,9 @@ class Pursuit(Alone):
         from Logic import path_finding
         self.path = path_finding(self.mob.coord, self.strike.coord, field, self.avoid)
         if self.path and get_ticks() - self.step >= self.mob.stats.step_time:
-            from Logic import hex_cube_to_offset
+            from Logic import coord_get_offset
             hexagon = self.path[0]
-            coord = hex_cube_to_offset(hexagon)
+            coord = coord_get_offset(hexagon)
             if not field.map[coord[0]][coord[1]][1].passability:
                 field.map[coord[0]][coord[1]][1].virtual_status_change(1)
             else:

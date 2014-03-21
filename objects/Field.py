@@ -1,5 +1,5 @@
 from File import File
-from Logic import __hex_offset_to_cube__, hex_to_pixel
+from Logic import coord_get_cube, hex_to_pixel
 from objects.Cell import Cell
 from objects.Door import Door
 from objects.Antagonist import Antagonist
@@ -24,7 +24,7 @@ class Field():
             static_cell = fields.get_info(row)
             dynamic_cell = fields.get_info(row + self.rows + 1)
             for column in range(self.columns):
-                coord = __hex_offset_to_cube__(row - 1, column)
+                coord = coord_get_cube(row - 1, column)
                 self.map[row - 1][column][0] = coord
                 self.map[row - 1][column][1] = static_objects(int(static_cell[column]), coord)
                 self.map[row - 1][column][2] = hex_to_pixel(coord, size)

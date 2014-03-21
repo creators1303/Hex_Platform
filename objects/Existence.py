@@ -1,12 +1,12 @@
 class Existence():
     def __init__(self, coord, state):
-        from Logic import hex_cube_to_offset
+        from Logic import coord_get_offset
         from json import load
         self.alone_state = state
         self.communication_state = False
         self.current_state = self.alone_state
         self.coord = coord
-        self.offset_coord = hex_cube_to_offset(coord)
+        self.offset_coord = coord_get_offset(coord)
         file = open("resources/" + self.__class__.__name__ + "/" + "PARAMETERS.json")
         parameters = load(file)
         self.passability = parameters["passability"]
@@ -19,11 +19,11 @@ class Existence():
 
     def going(self, field, hexagon):
         if not hexagon in field.objects:
-            from Logic import hex_cube_to_offset
+            from Logic import coord_get_offset
             field.objects[hexagon] = self
             del (field.objects[self.coord])
             self.coord = hexagon
-            self.offset_coord = hex_cube_to_offset(hexagon)
+            self.offset_coord = coord_get_offset(hexagon)
         else:
             print('BUG HERE')
 

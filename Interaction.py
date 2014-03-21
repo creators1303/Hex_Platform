@@ -21,7 +21,7 @@ def start_menu():
     from Controller import process
     from objects.Field import Field
     init()
-    screen = set_mode(list_modes()[0], FULLSCREEN)
+    screen = set_mode(list_modes()[0])#, FULLSCREEN)
     set_caption("Hero Misadventures")
     menu = Menu(("Previous Field", "New Field", "Load Field", "Quit"), screen)
     while True:

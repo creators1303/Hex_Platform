@@ -105,16 +105,16 @@ class Viewer():
 
         self.size = list(map(int, File("GRAPHIC.HMinf").get_info(0)))
 
-        self.cols = screen.get_width() - self.size[0] * 0.25
-        self.border_width = int((self.cols % (self.size[0] * 0.75)) / 2)
-        self.cols = int((self.cols - self.border_width * 2) / (self.size[0] * 0.75))
+        self.cols = screen.get_width() - self.size[0] // 4
+        self.border_width = self.cols % int(self.size[0] * 0.75) // 2
+        self.cols = (self.cols - self.border_width * 2) // int(self.size[0] * 0.75)
 
-        self.rows = screen.get_height() - self.size[1] / 2
-        self.border_height = int((self.rows % self.size[1]) / 2)
-        self.rows = int((self.rows - self.border_height * 2) / self.size[1])
+        self.rows = screen.get_height() - self.size[1] // 2
+        self.border_height = self.rows % self.size[1] // 2
+        self.rows = (self.rows - self.border_height * 2) // self.size[1]
 
-        self.zone_rows = int(self.rows / 2) + (int(self.rows / 2) + 1) % 2
-        self.zone_cols = int(self.cols / 2) + (int(self.cols / 2) + 1) % 2
+        self.zone_rows = self.rows // 2 + (self.rows // 2 + 1) % 2
+        self.zone_cols = self.cols // 2 + (self.cols // 2 + 1) % 2
         self.point = None
         self.lead = None
         self.border_from = [None, None]
@@ -123,8 +123,8 @@ class Viewer():
 
     def set_lead(self, lead):
         if self.lead != lead:
-            self.point = [int(lead.offset_coord[0] - (self.zone_rows - 1) / 2),
-                          int(lead.offset_coord[1] - (self.zone_cols - 1) / 2)]
+            self.point = [lead.offset_coord[0] - (self.zone_rows - 1) // 2,
+                          lead.offset_coord[1] - (self.zone_cols - 1) // 2]
             self.lead = lead
             self.border_from = [False, False]
             self.border_to = False
@@ -139,8 +139,8 @@ class Viewer():
             self.point[1] -= 1
         elif self.lead.offset_coord[1] >= self.point[1] + self.zone_cols:
             self.point[1] += 1
-        self.border_from = [self.point[0] - int((self.rows - self.zone_rows) / 2),
-                            self.point[1] - int((self.cols - self.zone_cols) / 2)]
+        self.border_from = [self.point[0] - (self.rows - self.zone_rows) // 2,
+                            self.point[1] - (self.cols - self.zone_cols) // 2]
         if self.border_from[0] < 0:
             self.border_from[0] = 0
         if self.border_from[1] < 0:
