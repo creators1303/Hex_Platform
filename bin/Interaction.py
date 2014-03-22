@@ -19,10 +19,10 @@ def admin_menu():
         if choose == -1:
             continue
         else:
-            quit()
             if choose == 0:
-                debug_menu()
+                debug_menu(screen)
             elif choose == 1:
+                quit()
                 start_menu()
             return
 
@@ -42,14 +42,10 @@ def pause_menu(screen, field):
         return False
 
 
-def debug_menu():
-    from pygame.display import set_mode, list_modes, set_caption
-    from pygame import init, quit
+def debug_menu(screen):
+    from pygame import quit
     from bin.Controller import process
 
-    init()
-    screen = set_mode(list_modes()[0])
-    set_caption("Hero Misadventures")
     menu = Menu(("Previous Field", "New Field", "Load Field", "Quit"), screen, surface=color("Firebrick"),
                 text_color=color("Black"), selection_color=color("Coral"))
     while True:
