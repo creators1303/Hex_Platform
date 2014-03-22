@@ -90,7 +90,7 @@ class Menu:
 class ColorStorage():
     def __init__(self):
         from json import load
-        file = open("testing/colors.json", "r")
+        file = open("res/colors.json", "r")
         self.palette = load(file)
 
     def get_color(self, name):

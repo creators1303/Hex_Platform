@@ -5,6 +5,21 @@ storage = ColorStorage()
 color = storage.get_color
 
 
+def pause_menu(screen, field):
+    menu = Menu(("Continue", "Save", "Quit"), screen, surface=color("Lime Green"),
+                selection_color=color("Medium Spring Green"), text_color=color("Dodger Blue"))
+    choose = menu.update()
+    if choose == 0:
+        return True
+    if choose == 1:
+        from pickle import dump
+
+        dump(field, open("res/SAVE.HMsave", "wb"))
+        return True
+    if choose == 2:
+        return False
+
+
 def admin_menu():
     from pygame.display import set_mode, list_modes, set_caption
     from pygame import init, quit
@@ -20,26 +35,17 @@ def admin_menu():
             continue
         else:
             if choose == 0:
-                debug_menu(screen)
+                from cProfile import runctx
+                from pstats import Stats
+
+                runctx("from bin.Interaction import debug_menu; debug_menu(screen)", {"screen": screen}, {}, "test/profiling.prof")
+                file = open("test/profiling.txt", "w")
+                info = Stats("test/profiling.prof", stream=file)
+                info.strip_dirs().sort_stats("cumulative").print_stats()
             elif choose == 1:
                 quit()
                 start_menu()
             return
-
-
-def pause_menu(screen, field):
-    menu = Menu(("Continue", "Save", "Quit"), screen, surface=color("Lime Green"),
-                selection_color=color("Medium Spring Green"), text_color=color("Dodger Blue"))
-    choose = menu.update()
-    if choose == 0:
-        return True
-    if choose == 1:
-        from pickle import dump
-
-        dump(field, open("res/SAVE.HMsave", "wb"))
-        return True
-    if choose == 2:
-        return False
 
 
 def debug_menu(screen):
@@ -56,7 +62,7 @@ def debug_menu(screen):
         elif choose == 1:
             from ctypes import cdll
 
-            cdll.LoadLibrary("Generator.dll").main_generator()
+            cdll.LoadLibrary("bin/Generator.dll").main_generator()
             field = Field(screen)
             process(screen, field)
         elif choose == 2:
@@ -90,7 +96,7 @@ def start_menu():
         elif choose == 1:
             from ctypes import cdll
 
-            cdll.LoadLibrary("Generator.dll").main_generator()
+            cdll.LoadLibrary("bin/Generator.dll").main_generator()
             field = Field(screen)
             process(screen, field)
         elif choose == 2:

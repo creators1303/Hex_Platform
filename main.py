@@ -1,7 +1,5 @@
-from bin.Interaction import admin_menu
-
-
 def main():
+    from bin.Interaction import admin_menu
     admin_menu()
 
 if __name__ == "__main__":
