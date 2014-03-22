@@ -1,4 +1,4 @@
-from states.Alone import Alone
+from st.Alone import Alone
 
 
 class PrimaryAntagonist(Alone):

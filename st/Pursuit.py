@@ -1,4 +1,4 @@
-from states.Alone import Alone
+from st.Alone import Alone
 
 
 class Pursuit(Alone):
@@ -12,7 +12,7 @@ class Pursuit(Alone):
 
     def update(self, field):
         if not self.strike:
-            from Logic import neighbour_finding
+            from bin.Logic import neighbour_finding
             self.strike = neighbour_finding(self.mob.coord, field, self.avoid)
         else:
             #self.find = get_ticks()
@@ -21,10 +21,10 @@ class Pursuit(Alone):
 
     def going(self, field):
         from pygame.time import get_ticks
-        from Logic import path_finding
+        from bin.Logic import path_finding
         self.path = path_finding(self.mob.coord, self.strike.coord, field, self.avoid)
         if self.path and get_ticks() - self.step >= self.mob.stats.step_time:
-            from Logic import coord_get_offset
+            from bin.Logic import coord_get_offset
             hexagon = self.path[0]
             coord = coord_get_offset(hexagon)
             if not field.map[coord[0]][coord[1]][1].passability:

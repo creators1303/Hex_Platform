@@ -1,6 +1,9 @@
+from st.Waiting import Waiting
+from st.PrimarySupervisor import PrimarySupervisor
+
+
 class Supervisor():
     def __init__(self):
-        from states.PrimarySupervisor import PrimarySupervisor
         self.state = PrimarySupervisor(self)
         self.leads = []
         self.current_lead = 0
@@ -11,6 +14,5 @@ class Supervisor():
     def state_update(self, field):
         status = self.state.update(field)
         if status == 5:
-            from states.Waiting import Waiting
             self.state = Waiting(self)
         return status

@@ -1,8 +1,8 @@
-from Interaction import start_menu
+from bin.Interaction import admin_menu
 
 
 def main():
-    start_menu()
+    admin_menu()
 
 if __name__ == "__main__":
     main()

@@ -1,12 +1,13 @@
-from File import File
-from Logic import coord_get_cube, hex_to_pixel
-from objects.Cell import Cell
-from objects.Door import Door
-from objects.Antagonist import Antagonist
-from objects.Protagonist import Protagonist
-from objects.Wall import Wall
-from objects.Supervisor import Supervisor
-from Graphic import Viewer
+from bin.Logic import coord_get_cube, hex_to_pixel
+from bin.Graphic import Viewer
+from bin.File import File
+from obj.Antagonist import Antagonist
+from obj.Protagonist import Protagonist
+from obj.Cell import Cell
+from obj.Wall import Wall
+from obj.Door import Door
+from obj.Supervisor import Supervisor
+
 
 
 class Field():

@@ -1,4 +1,4 @@
-from states.Main import Main
+from st.Main import Main
 
 
 class Alone(Main):
@@ -11,9 +11,9 @@ class Alone(Main):
         return self.mob.current_state.update(field)
 
     def global_check(self, field):
-        from Logic import neighbours_in_radius
+        from bin.Logic import neighbours_in_radius
         if self.mob.stats.view_radius:
-            from Logic import hex_visible_true
+            from bin.Logic import hex_visible_true
             hex_visible_true(field, self.mob.coord, self.mob.stats.view_radius)
 
         nearest = neighbours_in_radius(self.mob.coord, 1, field)

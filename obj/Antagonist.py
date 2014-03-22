@@ -1,11 +1,11 @@
-from objects.Existence import Existence
+from st.PrimaryAntagonist import PrimaryAntagonist
+from obj.Existence import Existence
+from obj.Stats import Stats
 
 
 class Antagonist(Existence):
 
     def __init__(self, coord):
-        from objects.Stats import Stats
-        from states.PrimaryAntagonist import PrimaryAntagonist
         Existence.__init__(self, coord, PrimaryAntagonist(self))
         self.stats = Stats(self)
 

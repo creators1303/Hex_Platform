@@ -1,4 +1,4 @@
-from objects.Existence import Existence
+from obj.Existence import Existence
 
 
 class Cell(Existence):

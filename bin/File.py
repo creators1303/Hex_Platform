@@ -1,10 +1,10 @@
 class File():
     def __init__(self, name):
         try:
-            file = open('resources/' + name)
+            file = open('res/' + name)
             self.info = file.readlines()
         except IOError:
-            from Worker import error_message
+            from bin.Worker import error_message
             error_message("Loading:", "not found " + name)
 
     def get_info(self, string):

@@ -8,7 +8,7 @@ def object_image_load(parameters):
     from pygame.transform import scale
     import pygame.image
     try:
-        image = pygame.image.load('resources/' + parameters[0] + '.HMtex').convert()
+        image = pygame.image.load('res/' + parameters[0] + '.HMtex').convert()
     except error:
         error_message("Loading:", "not found " + parameters[0] + '.HMtex')
     else:

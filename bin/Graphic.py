@@ -1,6 +1,8 @@
+from bin.File import File
+
+
 class Menu:
-    def __init__(self, buttons, screen, font_size=120, text_color=(0, 0, 255), selection_color=(0, 150, 0),
-                 surface=(0, 200, 50)):
+    def __init__(self, buttons, screen, text_color, selection_color, surface, font_size=120):
         from pygame.font import Font
 
         self.buttons = buttons
@@ -82,6 +84,17 @@ class Menu:
                     self.draw(1)
                 if event.key == K_RETURN:
                     return self.get_position()
+        return -1
+
+
+class ColorStorage():
+    def __init__(self):
+        from json import load
+        file = open("testing/colors.json", "r")
+        self.palette = load(file)
+
+    def get_color(self, name):
+        return self.palette[name]
 
 
 class ImageStorage():
@@ -94,14 +107,13 @@ class ImageStorage():
         return self.storage[parameters[0] + '.HMtex']
 
     def load_image(self, parameters):
-        from Worker import object_image_load
+        from bin.Worker import object_image_load
 
         self.storage[parameters[0] + '.HMtex'] = object_image_load(parameters)
 
 
 class Viewer():
     def __init__(self, screen):
-        from File import File
 
         self.size = list(map(int, File("GRAPHIC.HMinf").get_info(0)))
 

@@ -1,4 +1,4 @@
-from states.Communication import Communication
+from st.Communication import Communication
 
 
 class Merging(Communication):

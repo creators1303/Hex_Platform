@@ -1,4 +1,4 @@
-from states.Alone import Alone
+from st.Alone import Alone
 
 
 class Waiting(Alone):
@@ -21,11 +21,11 @@ class Waiting(Alone):
                 self.mob.current_lead -= 1
                 self.mob.current_lead %= len(self.mob.leads)
             elif new_event.key == K_ESCAPE:
-                from Interaction import pause_menu
+                from bin.Interaction import pause_menu
                 return pause_menu(field.screen, field)
         elif new_event.type == MOUSEBUTTONUP:
             if new_event.button == 1:
-                from Logic import pixel_to_hex, coord_get_offset, hex_coord_available
+                from bin.Logic import pixel_to_hex, coord_get_offset, hex_coord_available
                 position = new_event.pos[0] + field.camera.border_pixel[0], new_event.pos[1] + field.camera.border_pixel[1]
                 hexagon = pixel_to_hex(position, field.camera.size, field)
                 coord = coord_get_offset(hexagon)

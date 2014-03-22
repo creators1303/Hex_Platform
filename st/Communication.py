@@ -1,4 +1,4 @@
-from states.Main import Main
+from st.Main import Main
 
 
 class Communication(Main):
@@ -10,7 +10,7 @@ class Communication(Main):
         return self.mob.current_state.update(field)
 
     def global_check(self, field):
-        from Logic import hex_distance, hex_visible_true
+        from bin.Logic import hex_distance, hex_visible_true
         if self.mob.stats.view_radius:
             hex_visible_true(field, self.mob.coord, self.mob.stats.view_radius)
         if self.communication.health <= 0 or hex_distance(self.mob.coord, self.communication.coord) > 1:
