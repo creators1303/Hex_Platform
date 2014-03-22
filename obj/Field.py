@@ -21,42 +21,43 @@ class Field():
         self.objects = {}
         self.supervisors = [Supervisor()]
         self.camera = Viewer(screen)
+        self.coord_dict = {}
         for row in range(1, self.rows + 1):
             static_cell = fields.get_info(row)
             dynamic_cell = fields.get_info(row + self.rows + 1)
             for column in range(self.columns):
                 coord = coord_get_cube(row - 1, column)
+                self.coord_dict[coord] = (row - 1, column)
                 self.map[row - 1][column][0] = coord
-                self.map[row - 1][column][1] = static_objects(int(static_cell[column]), coord)
-                self.map[row - 1][column][2] = hex_to_pixel(coord, size)
+                self.map[row - 1][column][1] = self.static_objects(int(static_cell[column]), coord)
+                self.map[row - 1][column][2] = hex_to_pixel(coord, size, self)
                 self.dynamic_objects(int(dynamic_cell[column]), coord)
 
     def dynamic_objects(self, number, coord):
         if number == 1:
-            thing = Protagonist(coord)
+            thing = Protagonist(coord, self)
             self.objects[coord] = thing
             self.supervisors[0].add_lead(thing)
         elif number == 2:
-            thing = Antagonist(coord)
+            thing = Antagonist(coord, self)
             self.objects[coord] = thing
         else:
             #TODO: вставить исключение
             pass
 
-
-def static_objects(number, coord):
-    if number == 0:
-        thing = Cell(coord)
-    elif number == 1:
-        thing = Wall(coord, False)
-    elif number == 2:
-        thing = Wall(coord, True)
-    elif number == 3:
-        thing = Door(coord)
-    elif number == 4:
-        thing = Wall(coord, False)
-    else:
-        #TODO: вставить исключение
-        pass
-    return thing
+    def static_objects(self, number, coord):
+        if number == 0:
+            thing = Cell(coord, self)
+        elif number == 1:
+            thing = Wall(coord, False, self)
+        elif number == 2:
+            thing = Wall(coord, True, self)
+        elif number == 3:
+            thing = Door(coord, self)
+        elif number == 4:
+            thing = Wall(coord, False, self)
+        else:
+            #TODO: вставить исключение
+            pass
+        return thing
 

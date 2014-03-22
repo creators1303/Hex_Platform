@@ -6,16 +6,17 @@ from st.Pursuit import Pursuit
 
 
 class Existence():
-    def __init__(self, coord, state):
+    def __init__(self, coord, state, field):
         from bin.Logic import coord_get_offset
         from json import load
         self.alone_state = state
         self.communication_state = False
         self.current_state = self.alone_state
         self.coord = coord
-        self.offset_coord = coord_get_offset(coord)
+        self.offset_coord = coord_get_offset(coord, field)
         file = open("res/" + self.__class__.__name__ + "/" + "PARAMETERS.json")
         parameters = load(file)
+        file.close()
         self.passability = parameters["passability"]
         self.transparency = parameters["transparency"]
         self.passability_change = parameters["passability_change"]
@@ -30,7 +31,7 @@ class Existence():
             field.objects[hexagon] = self
             del (field.objects[self.coord])
             self.coord = hexagon
-            self.offset_coord = coord_get_offset(hexagon)
+            self.offset_coord = coord_get_offset(hexagon, field)
         else:
             print('BUG HERE')
 

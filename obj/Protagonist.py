@@ -4,8 +4,8 @@ from obj.Stats import Stats
 
 
 class Protagonist(Existence):
-    def __init__(self, coord):
-        Existence.__init__(self, coord, PrimaryProtagonist(self))
+    def __init__(self, coord, field):
+        Existence.__init__(self, coord, PrimaryProtagonist(self), field)
         self.stats = Stats(self)
 
     @staticmethod

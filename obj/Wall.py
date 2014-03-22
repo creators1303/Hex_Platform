@@ -2,8 +2,8 @@ from obj.Existence import Existence
 
 
 class Wall(Existence):
-    def __init__(self, coord, destructible):
-        Existence.__init__(self, coord, False)
+    def __init__(self, coord, destructible, field):
+        Existence.__init__(self, coord, False, field)
         self.destructible = destructible
 
     @staticmethod

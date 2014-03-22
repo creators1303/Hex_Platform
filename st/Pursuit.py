@@ -26,7 +26,7 @@ class Pursuit(Alone):
         if self.path and get_ticks() - self.step >= self.mob.stats.step_time:
             from bin.Logic import coord_get_offset
             hexagon = self.path[0]
-            coord = coord_get_offset(hexagon)
+            coord = coord_get_offset(hexagon, field)
             if not field.map[coord[0]][coord[1]][1].passability:
                 field.map[coord[0]][coord[1]][1].virtual_status_change(1)
             else:

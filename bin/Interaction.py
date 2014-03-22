@@ -6,8 +6,8 @@ color = storage.get_color
 
 
 def pause_menu(screen, field):
-    menu = Menu(("Continue", "Save", "Quit"), screen, surface=color("Lime Green"),
-                selection_color=color("Medium Spring Green"), text_color=color("Dodger Blue"))
+    menu = Menu(("Continue", "Save", "Quit"), screen, surface=color("Lawn Green"),
+                selection_color=color("Lime Green"), text_color=color("Medium Blue"))
     choose = menu.update()
     if choose == 0:
         return True
@@ -86,8 +86,8 @@ def start_menu():
     init()
     screen = set_mode(list_modes()[0], FULLSCREEN)
     set_caption("Hero Misadventures")
-    menu = Menu(("Previous Field", "New Field", "Load Field", "Quit"), screen, surface=color("Lime Green"),
-                selection_color=color("Medium Spring Green"), text_color=color("Dodger Blue"))
+    menu = Menu(("Previous Field", "New Field", "Load Field", "Quit"), screen, surface=color("Lawn Green"),
+                selection_color=color("Lime Green"), text_color=color("Medium Blue"))
     while True:
         choose = menu.update()
         if choose == 0:

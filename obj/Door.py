@@ -2,8 +2,8 @@ from obj.Existence import Existence
 
 
 class Door(Existence):
-    def __init__(self, coord):
-        Existence.__init__(self, coord, False)
+    def __init__(self, coord, field):
+        Existence.__init__(self, coord, False, field)
         self.opening = 0
         self.opening_time = False
         self.hard = 500

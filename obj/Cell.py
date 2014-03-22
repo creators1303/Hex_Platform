@@ -2,8 +2,8 @@ from obj.Existence import Existence
 
 
 class Cell(Existence):
-    def __init__(self, coord):
-        Existence.__init__(self, coord, False)
+    def __init__(self, coord, field):
+        Existence.__init__(self, coord, False, field)
 
     @staticmethod
     def virtual_status_change():

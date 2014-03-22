@@ -25,11 +25,11 @@ class Waiting(Alone):
                 return pause_menu(field.screen, field)
         elif new_event.type == MOUSEBUTTONUP:
             if new_event.button == 1:
-                from bin.Logic import pixel_to_hex, coord_get_offset, hex_coord_available
+                from bin.Logic import pixel_to_hex, coord_get_offset, coord_available
                 position = new_event.pos[0] + field.camera.border_pixel[0], new_event.pos[1] + field.camera.border_pixel[1]
                 hexagon = pixel_to_hex(position, field.camera.size, field)
-                coord = coord_get_offset(hexagon)
-                if hex_coord_available(hexagon, field) and field.map[coord[0]][coord[1]][1].exploration and \
+                coord = coord_get_offset(hexagon, field)
+                if coord_available(hexagon, field) and field.map[coord[0]][coord[1]][1].exploration and \
                         field.map[coord[0]][coord[1]][1].passability:
                     self.hexagon = hexagon
         clear()
