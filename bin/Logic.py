@@ -2,13 +2,11 @@ def line_length(coord1, coord2):
     """
     @param coord1: cube coord of first hex
     @param coord2: cube coord of second hex
-    @return: logic line length of line between first and second hexes
+    @return: logic length of line between first and second hexes
     """
-    from math import hypot
-
     logic_coord1 = hex_to_coord(coord1)
     logic_coord2 = hex_to_coord(coord2)
-    return hypot(logic_coord1[0] - logic_coord2[0], logic_coord1[1] - logic_coord2[1])
+    return ((logic_coord1[0] - logic_coord2[0]) ** 2 + (logic_coord1[1] - logic_coord2[1]) ** 2) ** 0.5
 
 
 def hex_to_pixel(coord, size, field):
@@ -27,7 +25,7 @@ def hex_distance(coord1, coord2):
     @param coord2: cube coord of goal hex
     @return: distance in steps between two hexes
     """
-    return max([abs(coord1[ctrl] - coord2[ctrl]) for ctrl in range(3)])
+    return max([abs(coord[0] - coord[1]) for coord in zip(coord1, coord2)])
 
 
 def hex_to_coord(coord, shift=(0.0, 0.0)):
@@ -48,7 +46,7 @@ def coord_get_cube(row, column):
     """
     x = column
     y = row - (column + column % 2) // 2
-    return x, y, -x -y
+    return x, y, -x - y
 
 
 def coord_get_offset(coord, field):
@@ -57,15 +55,14 @@ def coord_get_offset(coord, field):
     @return: offset coord of hex
     """
     return field.coord_dict[coord]
-    return (coord[0] + 1) // 2 + coord[1], coord[0]
 
 
-def hex_neighbours(coord):
+def hex_neighbours(coord, field):
     """
     @param coord: cube coord of hex
     @return: cube coord of neighbours
     """
-    return [(coord[0] + x, coord[1] + y, coord[2] - x - y) for x in range(-1, 2) for y in range(-1, 2) if x != y]
+    return [tuple([sum(temp) for temp in zip(each, coord)]) for each in field.neighbours_list]
 
 
 def pixel_to_hex(coord, size, field):
@@ -109,34 +106,27 @@ def hex_radius(coord, radius, field):
     @return: all hexes in radius
     """
     coord_list = []
-    for x in range(coord[0] - radius, coord[0] + radius + 1):
-        for y in range(coord[1] - radius, coord[1] + radius + 1):
-            z = - x - y
-            if coord_available((x, y, z), field) and abs(z - coord[2]) <= radius:
-                    coord_list.append((x, y, z))
+    for each in field.radius_dict[str(radius)]:
+        current = tuple([sum(temp) for temp in zip(each, coord)])
+        if coord_available(current, field):
+            coord_list.append(current)
     return coord_list
 
 
 def hex_circle(coord, radius, field):
-    #TODO: оптимизировать позже добавление в лист координат, сейчас лень
     """
     @param coord: cube coord of hex
     @param radius: radius in hexes
     @param field: field object
     @return: all hexes in radius steps
     """
+    if radius == -1:
+        return []
     coord_list = []
-    shift_list = []
-    if not radius:
-        return [coord]
-    for r in range(1, radius + 1):
-        shift_list.append((r, radius - r, - radius))
-        for ctrl in range(6):
-            x = shift_list[-1][0]
-            y = shift_list[-1][1]
-            shift_list.append((x + y, - x, - y))
-            if coord_available((x + y + coord[0], - x + coord[1], - y + coord[2]), field):
-                coord_list.append((x + y + coord[0], - x + coord[1], - y + coord[2]))
+    for each in field.circles_dict[str(radius)]:
+        current = tuple([sum(temp) for temp in zip(each, coord)])
+        if coord_available(current, field):
+            coord_list.append(current)
     return coord_list
 
 
@@ -174,63 +164,34 @@ def hexagon_visible(shadows, hexagon, field):
             return
         if shadow[0] < hexagon[3] < shadow[1]:
             status = False
+    coord_offset = coord_get_offset(hexagon[0], field)
     if status:
-        coord_offset = coord_get_offset(hexagon[0], field)
         field.map[coord_offset[0]][coord_offset[1]][1].visible_change(2)
     else:
-        coord_offset = coord_get_offset(hexagon[0], field)
         if field.map[coord_offset[0]][coord_offset[1]][1].visibility != 2:
             field.map[coord_offset[0]][coord_offset[1]][1].visible_change(1)
 
 
 def hex_visible_true(field, coord, radius):
-    #TODO: если непрозрачен текущий
     """
     @param field: field object to find map size
     @param coord: cube coord of viewer position
     @param radius: ability to see far
     """
-    angles = [(0.25, 0), (0.75, 0), (1, 0.4330127018922193), (0.75, 0.8660254037844386), (0.25, 0.8660254037844386),
-              (0, 0.4330127018922193)]
     shadows = []
-    coord_offset = coord_get_offset(coord, field)
-    field.map[coord_offset[0]][coord_offset[1]][1].visible_change(2)
-    logic_coord1 = hex_to_coord(coord, (0.5, 0.4330127018922193))
-    for r in range(radius):
-        temp_shadows = hex_circle(coord, r, field)
+    for r in range(radius + 1):
+        temp_shadows = hex_circle(coord, r - 1, field)
         for temp_shadow in temp_shadows:
             coord_offset = coord_get_offset(temp_shadow, field)
             if not field.map[coord_offset[0]][coord_offset[1]][1].transparency:
-                shadow_angles = []
-                for angle in angles:
-                    logic_coord2 = hex_to_coord(temp_shadow, angle)
-                    shadow_angles.append(round(__hex_angle__(logic_coord1, logic_coord2)))
-                max_angle = max(shadow_angles)
-                min_angle = min(shadow_angles)
-                if max_angle - min_angle > 180:
-                    min_angle = max([shadow_angle for shadow_angle in shadow_angles if shadow_angle < 180])
-                    max_angle = min([shadow_angle for shadow_angle in shadow_angles if shadow_angle > 180])
-                    shadows.append(list((max_angle, min_angle + 360)))
-                    shadows.append(list((max_angle - 360, min_angle)))
-                else:
-                    shadows.append(list((min_angle, max_angle)))
-                    shadows.append(list((min_angle - 360, max_angle - 360)))
-        hexes_coord = hex_circle(coord, r + 1, field)
+                shadows.extend(field.shadows_dict[str(r - 1)][
+                    str((coord[0] - temp_shadow[0], coord[1] - temp_shadow[1], coord[2] - temp_shadow[2]))])
+        hexes_coord = hex_circle(coord, r, field)
         hexes = []
         for temp_hex in hexes_coord:
-            hex_angles = []
-            for angle in angles:
-                logic_coord2 = hex_to_coord(temp_hex, angle)
-                hex_angles.append(round(__hex_angle__(logic_coord1, logic_coord2)))
-            max_angle = max(hex_angles)
-            min_angle = min(hex_angles)
-            center_angle = round(__hex_angle__(logic_coord1, hex_to_coord(temp_hex, (0.5, 0.4330127018922193))))
-            if max_angle - min_angle > 180:
-                min_angle = max([shadow_angle for shadow_angle in hex_angles if shadow_angle < 180])
-                max_angle = min([shadow_angle for shadow_angle in hex_angles if shadow_angle > 180])
-                hexes.append((temp_hex, max_angle - 360, min_angle, center_angle))
-            else:
-                hexes.append((temp_hex, min_angle, max_angle, center_angle))
+            current = list([temp_hex])
+            current.extend(field.hexes_dict[str(r)][str((coord[0] - temp_hex[0], coord[1] - temp_hex[1], coord[2] - temp_hex[2]))])
+            hexes.append(current)
         shadows.sort()
         ctrl = 0
         while ctrl < len(shadows) - 1:
@@ -293,14 +254,15 @@ def path_finding(start_coord, finish_coord, field, avoid):
         close_coord.append(work_coord[0])
         open_coord.remove(work_coord[0])
         open_list.remove(work_coord)
-        for neigh_coord in hex_neighbours(work_coord[0]):
+        for neigh_coord in hex_neighbours(work_coord[0], field):
             offset_coord = coord_get_offset(neigh_coord, field)
             if (field.map[offset_coord[0]][offset_coord[1]][1].passability_change or
                     field.map[offset_coord[0]][offset_coord[1]][
                         1].passability) and not neigh_coord in close_coord and not neigh_coord in open_coord:
                 g = work_coord[2] + 1
                 h = hex_distance(start_coord, neigh_coord)
-                open_list.append((neigh_coord, g + h, g, h, line_length(start_coord, neigh_coord), work_coord[0]))
+                open_list.append(
+                    (neigh_coord, g + h, g, h, line_length(start_coord, neigh_coord), work_coord[0]))
                 open_coord.append(neigh_coord)
     return []
 
@@ -330,7 +292,7 @@ def ex_path_finding(start_coord, finish_coord, field, avoid):
         close_coord.append(work_coord[0])
         open_coord.remove(work_coord[0])
         open_list.remove(work_coord)
-        for neigh_coord in hex_neighbours(work_coord[0]):
+        for neigh_coord in hex_neighbours(work_coord[0], field):
             if neigh_coord == start_coord:
                 return work_coord[0]
             if not coord_available(neigh_coord, field):
@@ -341,7 +303,8 @@ def ex_path_finding(start_coord, finish_coord, field, avoid):
                         1].passability) and not neigh_coord in close_coord and not neigh_coord in open_coord:
                 g = work_coord[2] + 1
                 h = hex_distance(start_coord, neigh_coord)
-                open_list.append((neigh_coord, g + h, g, h, line_length(start_coord, neigh_coord), work_coord[0]))
+                open_list.append(
+                    (neigh_coord, g + h, g, h, line_length(start_coord, neigh_coord), work_coord[0]))
                 open_coord.append(neigh_coord)
     return False
 
@@ -374,7 +337,7 @@ def neighbour_finding(start_coord, field, avoid):
         close_coord.append(work_coord[0])
         open_coord.remove(work_coord[0])
         open_list.remove(work_coord)
-        for neigh_coord in hex_neighbours(work_coord[0]):
+        for neigh_coord in hex_neighbours(work_coord[0], field):
             offset_coord = coord_get_offset(neigh_coord, field)
             if (field.map[offset_coord[0]][offset_coord[1]][1].passability_change or
                     field.map[offset_coord[0]][offset_coord[1]][
@@ -407,7 +370,7 @@ def unexplored_finding(start_coord, field, avoid):
         close_coord.append(work_coord[0])
         open_coord.remove(work_coord[0])
         open_list.remove(work_coord)
-        for neigh_coord in hex_neighbours(work_coord[0]):
+        for neigh_coord in hex_neighbours(work_coord[0], field):
             if not neigh_coord in close_coord:
                 offset_coord = coord_get_offset(neigh_coord, field)
                 if not field.map[offset_coord[0]][offset_coord[1]][1].exploration:

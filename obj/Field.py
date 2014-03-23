@@ -9,7 +9,6 @@ from obj.Door import Door
 from obj.Supervisor import Supervisor
 
 
-
 class Field():
     def __init__(self, screen):
         #TODO: в файле не карта динамических объектов, а объекты по координатам
@@ -22,6 +21,12 @@ class Field():
         self.supervisors = [Supervisor()]
         self.camera = Viewer(screen)
         self.coord_dict = {}
+        from json import load
+        self.circles_dict = load(open("res/circle.json", "r"))
+        self.radius_dict = load(open("res/radius.json", "r"))
+        self.neighbours_list = load(open("res/neighbours.json", "r"))
+        self.hexes_dict = load(open("res/hexes.json", "r"))
+        self.shadows_dict = load(open("res/shadows.json", "r"))
         for row in range(1, self.rows + 1):
             static_cell = fields.get_info(row)
             dynamic_cell = fields.get_info(row + self.rows + 1)
