@@ -16,7 +16,7 @@ class Field():
         self.rows, self.columns = list(map(int, fields.get_info(0)))
         size = list(map(int, File("GRAPHIC.HMinf").get_info(0)))
         self.screen = screen
-        self.map = [[[[] for parameters in range(3)] for column in range(self.columns)] for row in range(self.rows)]
+        self.map = [[[None] * 3 for column in range(self.columns)] for row in range(self.rows)]
         self.objects = {}
         self.supervisors = [Supervisor()]
         self.camera = Viewer(screen)

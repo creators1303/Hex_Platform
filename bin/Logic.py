@@ -130,33 +130,6 @@ def hex_circle(coord, radius, field):
     return coord_list
 
 
-def __hex_angle__(coord1, coord2):
-    """
-    @param coord1: cube coord of first hex
-    @param coord2: cube coord of second hex
-    @return: line angle between two hexes
-    """
-    from math import degrees, atan
-
-    if coord2[0] == coord1[0]:
-        if coord2[1] > coord1[1]:
-            return 270
-        return 90
-    elif coord2[1] == coord1[1]:
-        if coord2[0] > coord1[0]:
-            return 0
-        return 180
-    else:
-        shadow_angle = degrees(atan(abs(coord2[1] - coord1[1]) / abs(coord2[0] - coord1[0])))
-        if coord2[0] > coord1[0]:
-            if coord2[1] < coord1[1]:
-                return shadow_angle
-            return 360 - shadow_angle
-        elif coord2[1] < coord1[1]:
-            return 180 - shadow_angle
-        return shadow_angle + 180
-
-
 def hexagon_visible(shadows, hexagon, field):
     status = True
     for shadow in shadows:
@@ -178,19 +151,19 @@ def hex_visible_true(field, coord, radius):
     @param coord: cube coord of viewer position
     @param radius: ability to see far
     """
+    from copy import deepcopy
     shadows = []
     for r in range(radius + 1):
         temp_shadows = hex_circle(coord, r - 1, field)
         for temp_shadow in temp_shadows:
             coord_offset = coord_get_offset(temp_shadow, field)
             if not field.map[coord_offset[0]][coord_offset[1]][1].transparency:
-                shadows.extend(field.shadows_dict[str(r - 1)][
-                    str((coord[0] - temp_shadow[0], coord[1] - temp_shadow[1], coord[2] - temp_shadow[2]))])
+                shadows.extend(deepcopy(field.shadows_dict[str(r - 1)][str((temp_shadow[0] - coord[0], temp_shadow[1] - coord[1], temp_shadow[2] - coord[2]))]))
         hexes_coord = hex_circle(coord, r, field)
         hexes = []
         for temp_hex in hexes_coord:
             current = list([temp_hex])
-            current.extend(field.hexes_dict[str(r)][str((coord[0] - temp_hex[0], coord[1] - temp_hex[1], coord[2] - temp_hex[2]))])
+            current.extend(field.hexes_dict[str(r)][str((temp_hex[0] - coord[0], temp_hex[1] - coord[1], temp_hex[2] - coord[2]))])
             hexes.append(current)
         shadows.sort()
         ctrl = 0
