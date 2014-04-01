@@ -77,9 +77,9 @@ class Existence():
 
     def image_status(self):
         if not self.exploration:
-            return False, False, False, 'Fog/' + 'fog_incognito', 255
+            return False, False, False, 'Fog/' + 'Fog_incognito', 255
         if not self.visibility:
-            return True, False, False, 'Fog/' + 'fog_war', 150
+            return True, False, False, 'Fog/' + 'Fog_war', 150
         if self.visibility == 1:
             return True, True, False, 'Fog/' + 'Fog', 50
         return True, True, True, False
