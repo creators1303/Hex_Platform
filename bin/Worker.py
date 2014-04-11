@@ -8,9 +8,9 @@ def object_image_load(parameters):
     from pygame.transform import scale
     import pygame.image
     try:
-        image = pygame.image.load('res/' + parameters[0] + '.HMtex').convert()
+        image = pygame.image.load('res/' + parameters[0] + '.bmp').convert()
     except error:
-        error_message("Loading:", "not found " + parameters[0] + '.HMtex')
+        error_message("Loading:", "not found " + parameters[0] + '.bmp')
     else:
         image.set_colorkey(image.get_at((0, 0)), RLEACCEL)
         image.set_alpha(parameters[1])

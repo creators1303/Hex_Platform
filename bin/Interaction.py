@@ -62,7 +62,7 @@ def debug_menu(screen):
         elif choose == 1:
             from ctypes import cdll
 
-            cdll.LoadLibrary("bin/Generator.dll").main_generator()
+            cdll.LoadLibrary("Generator.so").main_generator("res/GENERATOR.HMinf", "res/FIELD.HMmap")
             field = Field(screen)
             process(screen, field)
         elif choose == 2:
@@ -95,8 +95,7 @@ def start_menu():
             process(screen, field)
         elif choose == 1:
             from ctypes import cdll
-
-            cdll.LoadLibrary("bin/Generator.dll").main_generator()
+            cdll.LoadLibrary("Generator.so").main_generator("res/GENERATOR.HMinf", "res/FIELD.HMmap")
             field = Field(screen)
             process(screen, field)
         elif choose == 2:

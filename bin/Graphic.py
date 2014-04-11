@@ -102,14 +102,14 @@ class ImageStorage():
         self.storage = {}
 
     def get_image(self, parameters):
-        if not parameters[0] + '.HMtex' in self.storage.keys():
+        if not parameters[0] + '.bmp' in self.storage.keys():
             self.load_image(parameters)
-        return self.storage[parameters[0] + '.HMtex']
+        return self.storage[parameters[0] + '.bmp']
 
     def load_image(self, parameters):
         from bin.Worker import object_image_load
 
-        self.storage[parameters[0] + '.HMtex'] = object_image_load(parameters)
+        self.storage[parameters[0] + '.bmp'] = object_image_load(parameters)
 
 
 class Viewer():

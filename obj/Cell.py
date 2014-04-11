@@ -5,8 +5,7 @@ class Cell(Existence):
     def __init__(self, coord, field):
         Existence.__init__(self, coord, False, field)
 
-    @staticmethod
-    def virtual_status_change():
+    def virtual_status_change(self, power):
         return True
 
     def virtual_image_name(self):
